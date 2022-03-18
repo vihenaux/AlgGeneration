@@ -1,0 +1,2 @@
+./clean.sh
+./configure.sh
