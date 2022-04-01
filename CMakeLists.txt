@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-set(CMAKE_CXX_COMPILER "clang++-11")
+include(src/cmake/init.cmake)
 project(AlgGeneration LANGUAGES CXX)
 
-include_directories(src)
+add_subdirectory (src)
