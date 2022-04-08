@@ -1,5 +1,14 @@
 #pragma once
 
-// Empty class that represents a solution
+#include "mutation.hpp"
+
 // This class will be the base class for every solution class
-class Solution{};
+class Solution
+{
+	public:
+
+	// A solution has to be able to mutate and to reverse it
+	virtual void mutate(Mutation const& m) = 0;;
+	virtual void reverseMutation(Mutation const& m) = 0;
+};
+
