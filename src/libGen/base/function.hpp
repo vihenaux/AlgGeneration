@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <atomic>
+
 #include "solution.hpp"
 
 // A class that represents functions.
