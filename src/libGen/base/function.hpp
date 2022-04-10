@@ -16,9 +16,12 @@ class Function
 	// Get the number of solution this function evaluated
 	std::uint64_t getNumberOfCalls() const;
 
-	private:
+	protected:
 
+	void solutionEvaluated() const;
 	virtual std::uint64_t evaluate(Solution const& s) const = 0;
+
+	private:
 
 	mutable std::atomic<std::uint64_t> numberOfCalls_{0};
 };
