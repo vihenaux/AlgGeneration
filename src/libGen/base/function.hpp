@@ -10,6 +10,8 @@ class Function
 {
 	public:
 
+	virtual ~Function();
+
 	// Assign an evaluation to the solution passed
 	std::uint64_t operator()(Solution const& s) const;
 

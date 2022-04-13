@@ -1,6 +1,6 @@
 # Macro to add warning flags
 
-function(ADD_COMPILER_FLAG FLAG_TO_ADD)
+macro(ADD_COMPILER_FLAG FLAG_TO_ADD)
 	if(${ARGC} GREATER 1)
 		message(FATAL_ERROR "Too much arguments. \"${FLAG_TO_ADD}\" and \"${ARGN}\" not applied.")
 	else()
@@ -10,4 +10,4 @@ function(ADD_COMPILER_FLAG FLAG_TO_ADD)
 		endif()
 		SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLAG_TO_ADD}")
 	endif()
-endfunction()
+endmacro()

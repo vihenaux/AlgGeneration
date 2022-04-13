@@ -12,6 +12,8 @@ class Neighborhood
 {
 	public:
 
+	virtual ~Neighborhood();
+
 	Mutation nextNeighbor();
 	void acceptMutation(Mutation const& m);
 	virtual bool neighborAvailable() const = 0;

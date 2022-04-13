@@ -8,5 +8,7 @@ class Mutation
 {
 	public:
 
+	virtual ~Mutation();
+
 	virtual Mutation& operator=(Mutation const& m) = 0;
 };
