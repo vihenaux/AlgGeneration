@@ -1,5 +1,9 @@
 #include "neighborhood.hpp"
 
+Neighborhood::~Neighborhood()
+{
+
+}
 
 Mutation Neighborhood::nextNeighbor()
 {

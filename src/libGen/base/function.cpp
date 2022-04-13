@@ -1,5 +1,10 @@
 #include "function.hpp"
 
+Function::~Function()
+{
+	
+}
+
 std::uint64_t Function::operator()(Solution const& s) const
 {
 	solutionEvaluated();
