@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "function.hpp"
+#include "solution.hpp"
 #include "mutation.hpp"
 
 class IncrementalFunction : public Function
@@ -10,27 +11,29 @@ class IncrementalFunction : public Function
 	public:
 
 	// Needed to store the solution
-	template<class DerivedFromSolution>
-	std::uint64_t operator()(DerivedFromSolution const& s) const
-	{
-		setNewSolution(s);
-		Function::operator()(s);
-	}
+	std::uint64_t operator()(std::shared_ptr<Solution> const& s) const;
 	// Assign an evaluation to the mutation of the last solution evaluated
-	std::uint64_t operator()(Mutation const& m) const;
+	std::uint64_t operator()(std::shared_ptr<Mutation> const& m) const;
+
+	// Needs to call 'setNewSolutionPvt' with the right template
+	virtual void setNewSolution(std::shared_ptr<Solution> const& s) const = 0;
+
+	// The following method should be overridden to avoid a copy of the mutation if possible
+	virtual void mutateLastSolution(std::shared_ptr<Mutation> const& m) const;
+
+	protected:
 
 	// Force a specific last solution evaluated
 	template<class DerivedFromSolution>
-	void setNewSolution(Solution const& s) const
+	void setNewSolutionPvt(std::shared_ptr<Solution> const& s)
 	{
-		std::unique_ptr<DerivedFromSolution> newSolution{new DerivedFromSolution(s)};
+		std::shared_ptr<DerivedFromSolution> newSolution{new DerivedFromSolution(std::dynamic_pointer_cast<DerivedFromSolution>(s))};
 		lastSolutionEvaluated_ = newSolution;
 	}
-	void mutateLastSolution(Mutation const& m) const;
 
 	private:
 
-	virtual std::uint64_t incremental_evaluation(Mutation const& s) const;
+	virtual std::uint64_t incremental_evaluation(std::shared_ptr<Mutation> const& s) const;
 
-	mutable std::unique_ptr<Solution> lastSolutionEvaluated_{nullptr};
+	mutable std::shared_ptr<Solution> lastSolutionEvaluated_{nullptr};
 };

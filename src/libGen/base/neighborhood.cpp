@@ -5,12 +5,20 @@ Neighborhood::~Neighborhood()
 
 }
 
-Mutation Neighborhood::nextNeighbor()
+void Neighborhood::setNewSolution(std::shared_ptr<Solution> const& s)
 {
+	numberOfNeighborsDiscarded_ = 0;
+
+	setNewSolutionPvt(s);
+}
+
+std::shared_ptr<Mutation> Neighborhood::nextNeighbor()
+{
+	++numberOfNeighborsDiscarded_;
 	return nextNeighborPvt();
 }
 
-void Neighborhood::acceptMutation(Mutation const& m)
+void Neighborhood::acceptMutation(std::shared_ptr<Mutation> const& m)
 {
 	numberOfNeighborsDiscarded_ = 0;
 

@@ -1,7 +1,9 @@
 #pragma once
 
 #include <cstdint>
+#include <memory>
 
+#include "solution.hpp"
 #include "mutation.hpp"
 
 /* A class that represents a neighborhood.
@@ -14,16 +16,20 @@ class Neighborhood
 
 	virtual ~Neighborhood();
 
-	Mutation nextNeighbor();
-	void acceptMutation(Mutation const& m);
+	void setNewSolution(std::shared_ptr<Solution> const& s);
+
+	std::shared_ptr<Mutation> nextNeighbor();
+	void acceptMutation(std::shared_ptr<Mutation> const& m);
 	virtual bool neighborAvailable() const = 0;
 
 	std::uint32_t getNumberOfNeighborsDiscarded() const;
 
 	private:
 
-	virtual Mutation nextNeighborPvt() = 0;
-	virtual void acceptMutationPvt(Mutation const& m) = 0;
+	virtual void setNewSolutionPvt(std::shared_ptr<Solution> const& s) = 0;
+
+	virtual std::shared_ptr<Mutation> nextNeighborPvt() = 0;
+	virtual void acceptMutationPvt(std::shared_ptr<Mutation> const& m) = 0;
 
 	std::uint32_t numberOfNeighborsDiscarded_{0};
 };

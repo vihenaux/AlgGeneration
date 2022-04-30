@@ -5,7 +5,7 @@ Function::~Function()
 	
 }
 
-std::uint64_t Function::operator()(Solution const& s) const
+std::uint64_t Function::operator()(std::shared_ptr<Solution> const& s) const
 {
 	solutionEvaluated();
 
