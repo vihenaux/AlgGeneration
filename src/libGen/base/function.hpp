@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <atomic>
+#include <memory>
 
 #include "solution.hpp"
 
@@ -13,15 +14,18 @@ class Function
 	virtual ~Function();
 
 	// Assign an evaluation to the solution passed
-	std::uint64_t operator()(Solution const& s) const;
+	std::uint64_t operator()(std::shared_ptr<Solution> const& s) const;
 
 	// Get the number of solution this function evaluated
 	std::uint64_t getNumberOfCalls() const;
 
+	// Needs to return a random solution to be a starting point
+	virtual std::shared_ptr<Solution> getRandomSolution() const = 0;
+
 	protected:
 
 	void solutionEvaluated() const;
-	virtual std::uint64_t evaluate(Solution const& s) const = 0;
+	virtual std::uint64_t evaluate(std::shared_ptr<Solution> const& s) const = 0;
 
 	private:
 

@@ -1,6 +1,6 @@
 #include "mutation.hpp"
 
-Mutation::~Mutation()
+void Mutation::requiredForVTable()
 {
-	
+
 }

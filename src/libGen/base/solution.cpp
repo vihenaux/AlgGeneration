@@ -2,5 +2,5 @@
 
 Solution::~Solution()
 {
-	
+
 }

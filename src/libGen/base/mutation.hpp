@@ -8,7 +8,7 @@ class Mutation
 {
 	public:
 
-	virtual ~Mutation();
+	virtual ~Mutation() = default;
 
-	virtual Mutation& operator=(Mutation const& m) = 0;
+	virtual void requiredForVTable();
 };
