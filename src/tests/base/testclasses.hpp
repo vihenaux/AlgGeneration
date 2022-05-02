@@ -2,7 +2,7 @@
 
 #include <cstdlib>
 #include <memory>
-#include <base/all.hpp>
+#include <alggen/base/all.hpp>
 
 class TestMutation final : public alggen::base::Mutation
 {

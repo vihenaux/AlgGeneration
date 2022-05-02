@@ -3,7 +3,7 @@ include(../cmake/init.cmake)
 project(libGeneration VERSION 0.0)
 
 # Enumerate every folder containing sources
-file(GLOB base base/*.cpp base/*.hpp)
+file(GLOB base alggen/base/*.cpp alggen/base/*.hpp)
 
 # Create library
 add_library(generation ${base})
