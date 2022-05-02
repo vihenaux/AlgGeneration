@@ -6,6 +6,11 @@
 
 #include "solution.hpp"
 
+namespace alggen
+{
+namespace base
+{
+
 // A class that represents functions.
 class Function
 {
@@ -31,3 +36,6 @@ class Function
 
 	mutable std::atomic<std::uint64_t> numberOfCalls_{0};
 };
+
+} // base namespace
+} // alggen namespace

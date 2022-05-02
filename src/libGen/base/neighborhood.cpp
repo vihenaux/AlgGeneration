@@ -1,5 +1,10 @@
 #include "neighborhood.hpp"
 
+namespace alggen
+{
+namespace base
+{
+
 Neighborhood::~Neighborhood()
 {
 
@@ -29,3 +34,6 @@ std::uint32_t Neighborhood::getNumberOfNeighborsDiscarded() const
 {
 	return numberOfNeighborsDiscarded_;
 }
+
+} // base namespace
+} // alggen namespace

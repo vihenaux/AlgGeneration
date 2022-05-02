@@ -1,5 +1,10 @@
 #include "incrementalfunction.hpp"
 
+namespace alggen
+{
+namespace base
+{
+
 std::uint64_t IncrementalFunction::operator()(std::shared_ptr<Solution> const& s) const
 {
 	setNewSolution(s);
@@ -37,3 +42,6 @@ std::uint64_t IncrementalFunction::incremental_evaluation(std::shared_ptr<Mutati
 
 	return evalMutation;
 }
+
+} // base namespace
+} // alggen namespace

@@ -29,17 +29,17 @@ TestSolution::TestSolution(std::uint8_t const& v) : value_(v)
 
 }
 
-void TestSolution::copy(std::shared_ptr<Solution> const& s)
+void TestSolution::copy(std::shared_ptr<alggen::base::Solution> const& s)
 {
 	value_ = std::dynamic_pointer_cast<TestSolution>(s)->value_;
 }
 
-void TestSolution::mutate(std::shared_ptr<Mutation> const& m)
+void TestSolution::mutate(std::shared_ptr<alggen::base::Mutation> const& m)
 {
 	value_ += std::dynamic_pointer_cast<TestMutation>(m)->getOffset();
 }
 
-void TestSolution::reverseMutation(std::shared_ptr<Mutation> const& m)
+void TestSolution::reverseMutation(std::shared_ptr<alggen::base::Mutation> const& m)
 {
 	value_ -= std::dynamic_pointer_cast<TestMutation>(m)->getOffset();
 }
@@ -56,12 +56,12 @@ TestFunction::~TestFunction()
 
 }
 
-std::shared_ptr<Solution> TestFunction::getRandomSolution() const
+std::shared_ptr<alggen::base::Solution> TestFunction::getRandomSolution() const
 {
 	return std::make_shared<TestSolution>();
 }
 
-std::uint64_t TestFunction::evaluate(std::shared_ptr<Solution> const& s) const
+std::uint64_t TestFunction::evaluate(std::shared_ptr<alggen::base::Solution> const& s) const
 {
 	return static_cast<std::uint64_t>(std::dynamic_pointer_cast<TestSolution>(s)->getValue());
 }
@@ -73,7 +73,7 @@ void TestNonOverloadedIncrementalFunction::requiredForVTable()
 
 }
 
-void TestIncrementalFunction::setNewSolution(std::shared_ptr<Solution> const& s) const
+void TestIncrementalFunction::setNewSolution(std::shared_ptr<alggen::base::Solution> const& s) const
 {
 	// We do not need a copy of the solution to do incremental evaluation
 	//setNewSolutionPvt(std::dynamic_pointer_cast<TestSolution>(s));
@@ -81,13 +81,13 @@ void TestIncrementalFunction::setNewSolution(std::shared_ptr<Solution> const& s)
 	lastSolutionEvaluation_ = std::dynamic_pointer_cast<TestSolution>(s)->getValue();
 }
 
-void TestIncrementalFunction::mutateLastSolution(std::shared_ptr<Mutation> const& m) const
+void TestIncrementalFunction::mutateLastSolution(std::shared_ptr<alggen::base::Mutation> const& m) const
 {
 	lastSolutionEvaluation_ = static_cast<std::uint64_t>(
 								static_cast<std::int64_t>(lastSolutionEvaluation_) + std::dynamic_pointer_cast<TestMutation>(m)->getOffset());
 }
 
-std::uint64_t TestIncrementalFunction::incremental_evaluation(std::shared_ptr<Mutation> const& m) const
+std::uint64_t TestIncrementalFunction::incremental_evaluation(std::shared_ptr<alggen::base::Mutation> const& m) const
 {
 	return static_cast<std::uint64_t>(static_cast<std::int64_t>(lastSolutionEvaluation_) + std::dynamic_pointer_cast<TestMutation>(m)->getOffset());
 }
@@ -99,7 +99,7 @@ TestNeighborhood::~TestNeighborhood()
 
 }
 
-void TestNeighborhood::setNewSolutionPvt(std::shared_ptr<Solution> const& s)
+void TestNeighborhood::setNewSolutionPvt(std::shared_ptr<alggen::base::Solution> const& s)
 {
 	rootSolution_->copy(s);
 }
@@ -112,14 +112,14 @@ bool TestNeighborhood::neighborAvailable() const
 	return (getNumberOfNeighborsDiscarded() < (2 - static_cast<std::uint8_t>((solVal == 255) || (solVal == 0))));
 }
 
-std::shared_ptr<Mutation> TestNeighborhood::nextNeighborPvt()
+std::shared_ptr<alggen::base::Mutation> TestNeighborhood::nextNeighborPvt()
 {
 	auto m = std::make_shared<TestMutation>((nextNeighbor_) ? -1 : 1);
 	nextNeighbor_ = !nextNeighbor_;
 	return std::move(m);
 }
 
-void TestNeighborhood::acceptMutationPvt(std::shared_ptr<Mutation> const& m)
+void TestNeighborhood::acceptMutationPvt(std::shared_ptr<alggen::base::Mutation> const& m)
 {
 	rootSolution_->mutate(m);
 

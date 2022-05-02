@@ -6,6 +6,11 @@
 #include "solution.hpp"
 #include "mutation.hpp"
 
+namespace alggen
+{
+namespace base
+{
+
 /* A class that represents a neighborhood.
  * A neighborhood must be able to generate neighbors/mutation
  * The number of neighbors generated between two accepted one.
@@ -33,3 +38,6 @@ class Neighborhood
 
 	std::uint32_t numberOfNeighborsDiscarded_{0};
 };
+
+} // base namespace
+} // alggen namespace
