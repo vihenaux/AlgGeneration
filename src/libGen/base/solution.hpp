@@ -3,6 +3,11 @@
 #include <memory>
 #include "mutation.hpp"
 
+namespace alggen
+{
+namespace base
+{
+
 // This class will be the base class for every solution class
 class Solution
 {
@@ -23,3 +28,5 @@ class Solution
 	virtual void reverseMutation(std::shared_ptr<Mutation> const& m) = 0;
 };
 
+} // base namespace
+} // alggen namespace

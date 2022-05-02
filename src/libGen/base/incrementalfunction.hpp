@@ -6,6 +6,11 @@
 #include "solution.hpp"
 #include "mutation.hpp"
 
+namespace alggen
+{
+namespace base
+{
+
 class IncrementalFunction : virtual public Function
 {
 	public:
@@ -26,3 +31,6 @@ class IncrementalFunction : virtual public Function
 
 	mutable std::shared_ptr<Solution> lastSolutionEvaluated_{nullptr};
 };
+
+} // base namespace
+} // alggen namespace

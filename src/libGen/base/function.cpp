@@ -1,5 +1,10 @@
 #include "function.hpp"
 
+namespace alggen
+{
+namespace base
+{
+
 Function::~Function()
 {
 	
@@ -21,3 +26,6 @@ void Function::solutionEvaluated() const
 {
 	++numberOfCalls_;
 }
+
+} // base namespace
+} // alggen namespace
