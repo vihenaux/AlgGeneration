@@ -4,7 +4,7 @@
 #include <memory>
 #include <base/all.hpp>
 
-class TestMutation final : public Mutation
+class TestMutation final : public alggen::base::Mutation
 {
 	public:
 
@@ -19,7 +19,7 @@ class TestMutation final : public Mutation
 	std::int8_t offset_{0};
 };
 
-class TestSolution final : public Solution
+class TestSolution final : public alggen::base::Solution
 {
 	public:
 
@@ -27,10 +27,10 @@ class TestSolution final : public Solution
 	TestSolution(std::uint8_t const& v);
 	virtual ~TestSolution() final = default;
 
-	virtual void copy(std::shared_ptr<Solution> const& s) final;
+	virtual void copy(std::shared_ptr<alggen::base::Solution> const& s) final;
 
-	virtual void mutate(std::shared_ptr<Mutation> const& m) final;
-	virtual void reverseMutation(std::shared_ptr<Mutation> const& m) final;
+	virtual void mutate(std::shared_ptr<alggen::base::Mutation> const& m) final;
+	virtual void reverseMutation(std::shared_ptr<alggen::base::Mutation> const& m) final;
 
 	std::uint8_t getValue() const;
 
@@ -39,41 +39,41 @@ class TestSolution final : public Solution
 	std::uint8_t value_{0};
 };
 
-class TestFunction : virtual public Function
+class TestFunction : virtual public alggen::base::Function
 {
 	public:
 
 	virtual ~TestFunction() override;
 
-	virtual std::shared_ptr<Solution> getRandomSolution() const final;
+	virtual std::shared_ptr<alggen::base::Solution> getRandomSolution() const final;
 
 	protected:
 
-	virtual std::uint64_t evaluate(std::shared_ptr<Solution> const& s) const final;
+	virtual std::uint64_t evaluate(std::shared_ptr<alggen::base::Solution> const& s) const final;
 };
 
-class TestNonOverloadedIncrementalFunction final : public IncrementalFunction, public TestFunction
+class TestNonOverloadedIncrementalFunction final : public alggen::base::IncrementalFunction, public TestFunction
 {
 	virtual void requiredForVTable() final;
 };
 
-class TestIncrementalFunction final : public IncrementalFunction, public TestFunction
+class TestIncrementalFunction final : public alggen::base::IncrementalFunction, public TestFunction
 {
 	public:
 
-	virtual void setNewSolution(std::shared_ptr<Solution> const& s) const final;
-	virtual void mutateLastSolution(std::shared_ptr<Mutation> const& m) const final;
+	virtual void setNewSolution(std::shared_ptr<alggen::base::Solution> const& s) const final;
+	virtual void mutateLastSolution(std::shared_ptr<alggen::base::Mutation> const& m) const final;
 
 	protected:
 
-	virtual std::uint64_t incremental_evaluation(std::shared_ptr<Mutation> const& m) const final;
+	virtual std::uint64_t incremental_evaluation(std::shared_ptr<alggen::base::Mutation> const& m) const final;
 
 	private:
 
 	mutable std::uint64_t lastSolutionEvaluation_{0};
 };
 
-class TestNeighborhood final : public Neighborhood
+class TestNeighborhood final : public alggen::base::Neighborhood
 {
 	public:
 
@@ -83,11 +83,11 @@ class TestNeighborhood final : public Neighborhood
 
 	private:
 
-	virtual void setNewSolutionPvt(std::shared_ptr<Solution> const& s) final;
+	virtual void setNewSolutionPvt(std::shared_ptr<alggen::base::Solution> const& s) final;
 
-	virtual std::shared_ptr<Mutation> nextNeighborPvt() final;
-	virtual void acceptMutationPvt(std::shared_ptr<Mutation> const& m) final;
+	virtual std::shared_ptr<alggen::base::Mutation> nextNeighborPvt() final;
+	virtual void acceptMutationPvt(std::shared_ptr<alggen::base::Mutation> const& m) final;
 
-	std::shared_ptr<Solution> rootSolution_{new TestSolution()};
+	std::shared_ptr<alggen::base::Solution> rootSolution_{new TestSolution()};
 	bool nextNeighbor_{false};
 };

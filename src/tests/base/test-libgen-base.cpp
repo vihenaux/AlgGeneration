@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 
 		std::shared_ptr<TestSolution> s1(new TestSolution());
 		std::shared_ptr<TestSolution> s2(new TestSolution());
-		s2->copy(std::dynamic_pointer_cast<Solution>(s1));
+		s2->copy(s1);
 
 		t.expectEqual(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Solution copy");
 
