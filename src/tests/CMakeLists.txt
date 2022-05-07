@@ -13,6 +13,6 @@ target_include_directories(test PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(test-libgen-base base/test-libgen-base.cpp base/testclasses.cpp)
 
-target_link_libraries(test-libgen-base LINK_PUBLIC test generation)
+target_link_libraries(test-libgen-base LINK_PUBLIC test GenerationBase)
 
 install(TARGETS test-libgen-base RUNTIME DESTINATION Release/bin)
