@@ -13,7 +13,6 @@ class Solution
 {
 	public:
 
-	// /!\ The default constructor of a Solution derived class should construct a random solution
 	Solution() = default;
 	Solution(Solution const& s) = delete;
 
@@ -26,6 +25,8 @@ class Solution
 	// A solution has to be able to mutate and to reverse it
 	virtual void mutate(std::shared_ptr<Mutation> const& m) = 0;
 	virtual void reverseMutation(std::shared_ptr<Mutation> const& m) = 0;
+
+	virtual void randomize() = 0;
 };
 
 } // base namespace
