@@ -48,21 +48,11 @@ int main(int argc, char **argv)
 	{
 		Test t("Solution tests");
 
-		bool isConstructorRandom = false;
-		for(unsigned int i(0); i < 100; ++i)
-		{
-			TestSolution s1,s2;
-			if(s1.getValue() != s2.getValue())
-			{
-				isConstructorRandom = true;
-				break;
-			}
-		}
-
-		t.expectTrue(isConstructorRandom, "Default constructor is random");
-
 		std::shared_ptr<TestSolution> s1(new TestSolution());
 		std::shared_ptr<TestSolution> s2(new TestSolution());
+
+		t.expectDifferent(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Default constructor is random");
+
 		s2->copy(s1);
 
 		t.expectEqual(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Solution copy");
@@ -83,6 +73,10 @@ int main(int argc, char **argv)
 		s2->mutate(m);
 
 		t.expectEqual(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Mutation is coherent");
+
+		s2->randomize();
+
+		t.expectDifferent(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Randomize");
 	}
 
 	// Function class tests
