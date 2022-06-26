@@ -30,8 +30,6 @@ class BitString : public base::Solution
 	virtual void mutate(std::shared_ptr<base::Mutation> const& m) override;
 	virtual void reverseMutation(std::shared_ptr<base::Mutation> const& m) override;
 
-	virtual void randomize() override;
-
 	// Get the value of the bit at index
 	inline bool operator[](std::size_t index) const;
 

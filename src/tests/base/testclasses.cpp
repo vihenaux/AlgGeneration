@@ -44,11 +44,6 @@ void TestSolution::reverseMutation(std::shared_ptr<alggen::base::Mutation> const
 	value_ -= std::dynamic_pointer_cast<TestMutation>(m)->getOffset();
 }
 
-void TestSolution::randomize()
-{
-	value_ = static_cast<uint8_t>(rand());
-}
-
 std::uint8_t TestSolution::getValue() const
 {
 	return value_;
