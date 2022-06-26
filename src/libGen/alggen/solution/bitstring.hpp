@@ -7,29 +7,6 @@
 
 namespace alggen
 {
-namespace mutation
-{
-
-// One flip mutation for bit string solutions
-// This mutation contains the data to flip one bit of a solution
-class OneFlip : public base::Mutation
-{
-	public:
-
-	OneFlip(std::size_t bit);
-	virtual ~OneFlip() override = default;
-
-	inline std::size_t getBit() const;
-
-	virtual void requiredForVTable() override;
-
-	private:
-
-	std::size_t bit_;
-};
-
-} // mutation namespace
-
 namespace solution
 {
 

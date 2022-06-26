@@ -1,27 +1,8 @@
 #include "bitstring.hpp"
+#include <alggen/neighborhood/oneflip.hpp>
 
 namespace alggen
 {
-namespace mutation
-{
-
-OneFlip::OneFlip(std::size_t bit) : bit_(bit)
-{
-
-}
-
-std::size_t OneFlip::getBit() const
-{
-	return bit_;
-}
-
-void OneFlip::requiredForVTable()
-{
-
-}
-
-} // mutation namespace
-
 namespace solution
 {
 
@@ -56,7 +37,7 @@ void BitString::copy(std::shared_ptr<base::Solution> const& s)
 
 void BitString::mutate(std::shared_ptr<base::Mutation> const& m)
 {
-	auto index = std::dynamic_pointer_cast<mutation::OneFlip>(m)->getBit();
+	auto index = std::dynamic_pointer_cast<alggen::mutation::OneFlip>(m)->getBit();
 	sol_[index] = !sol_[index];
 }
 

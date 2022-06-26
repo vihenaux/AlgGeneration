@@ -16,3 +16,11 @@ add_executable(test-libgen-base base/test-libgen-base.cpp base/testclasses.cpp)
 target_link_libraries(test-libgen-base LINK_PUBLIC test GenerationBase)
 
 install(TARGETS test-libgen-base RUNTIME DESTINATION Release/bin)
+
+# libGen solution test executable
+
+add_executable(test-libgen-solution solution/test-libgen-solution.cpp)
+
+target_link_libraries(test-libgen-solution LINK_PUBLIC test GenerationSolution)
+
+install(TARGETS test-libgen-solution RUNTIME DESTINATION Release/bin)

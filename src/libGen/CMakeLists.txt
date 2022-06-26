@@ -16,6 +16,21 @@ add_library(GenerationBase ${base})
 target_include_directories(GenerationBase PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 
+###########################
+# Generation Neighborhood #
+###########################
+
+# Enumerate every source file
+file(GLOB neighborhood alggen/neighborhood/*.cpp alggen/neighborhood/*.hpp)
+
+# Create library
+add_library(GenerationNeighborhood ${neighborhood})
+
+target_link_libraries(GenerationNeighborhood LINK_PUBLIC GenerationBase)
+
+target_include_directories(GenerationNeighborhood PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+
 #######################
 # Generation Solution #
 #######################
@@ -26,6 +41,6 @@ file(GLOB solution alggen/solution/*.cpp alggen/solution/*.hpp)
 # Create library
 add_library(GenerationSolution ${solution})
 
-target_link_libraries(GenerationSolution LINK_PUBLIC GenerationBase)
+target_link_libraries(GenerationSolution LINK_PUBLIC GenerationBase GenerationNeighborhood)
 
-target_include_directories(GenerationBase PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(GenerationSolution PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
