@@ -31,7 +31,7 @@ class BitString : public base::Solution
 	virtual void reverseMutation(std::shared_ptr<base::Mutation> const& m) override;
 
 	// Get the value of the bit at index
-	inline bool operator[](std::size_t index) const;
+	inline bool operator[](std::size_t index) const { return sol_[index]; }
 
 	private:
 

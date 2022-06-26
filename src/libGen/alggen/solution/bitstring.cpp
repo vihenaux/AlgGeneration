@@ -47,10 +47,5 @@ void BitString::reverseMutation(std::shared_ptr<base::Mutation> const& m)
 	mutate(m);
 }
 
-bool BitString::operator[](std::size_t index) const
-{
-	return sol_[index];
-}
-
 } // solution namespace
 } // alggen namespace
