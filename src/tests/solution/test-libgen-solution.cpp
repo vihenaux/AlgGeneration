@@ -56,14 +56,18 @@ int main(int argc, char **argv)
 		t.expectFalse(same, "Default constructor is random");
 
 		s2->copy(s1);
+		std::shared_ptr<alggen::solution::BitString> s3 = std::dynamic_pointer_cast<alggen::solution::BitString>(s1->createCopy());
 
 		same = true;
+		bool createCopy = true;
 		for(std::size_t i(0); i < 265; ++i)
 		{
 			same = same && ((*s1)[i] == (*s2)[i]);
+			createCopy = createCopy && ((*s1)[i] == (*s3)[i]);
 		}
 
 		t.expectTrue(same, "Solution copy");
+		t.expectTrue(same, "Solution create copy");
 
 		std::shared_ptr<alggen::mutation::OneFlip> m(new alggen::mutation::OneFlip(rand()%256));
 		s1->mutate(m);

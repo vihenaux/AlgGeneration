@@ -22,9 +22,10 @@ void IncrementalFunction::setNewSolution(std::shared_ptr<Solution> const& s) con
 {
 	if(!lastSolutionEvaluated_)
 	{
-		lastSolutionEvaluated_ = getRandomSolution();
+		lastSolutionEvaluated_ = s->createCopy();
+	} else {
+		lastSolutionEvaluated_->copy(s);
 	}
-	lastSolutionEvaluated_->copy(s);
 }
 
 void IncrementalFunction::mutateLastSolution(std::shared_ptr<Mutation> const& m) const

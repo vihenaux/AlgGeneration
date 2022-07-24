@@ -14,6 +14,14 @@ BitString::BitString(std::size_t size) : size_(size), sol_(new bool[size])
 	}
 }
 
+BitString::BitString(BitString const& bt) : size_(bt.size_), sol_(new bool[bt.size_])
+{
+	for(std::size_t i(0); i < size_; ++i)
+	{
+		sol_[i] = bt.sol_[i];
+	}
+}
+
 BitString::~BitString()
 {
 	delete[] sol_;
@@ -33,6 +41,11 @@ void BitString::copy(std::shared_ptr<base::Solution> const& s)
 	{
 		sol_[i] = (*derivedSol)[i];
 	}
+}
+
+std::shared_ptr<base::Solution> BitString::createCopy() const
+{
+	return std::make_shared<BitString>(*this);
 }
 
 void BitString::mutate(std::shared_ptr<base::Mutation> const& m)

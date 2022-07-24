@@ -20,12 +20,14 @@ class BitString : public base::Solution
 	// size is the number of bits in the solution
 	BitString(std::size_t size);
 	BitString(base::Solution const& s) = delete;
+	BitString(BitString const& bt);
 
 	virtual ~BitString() override;
 
 	BitString& operator=(base::Solution const& s) = delete;
 
 	virtual void copy(std::shared_ptr<base::Solution> const& s) override;
+	virtual std::shared_ptr<base::Solution> createCopy() const override;
 
 	virtual void mutate(std::shared_ptr<base::Mutation> const& m) override;
 	virtual void reverseMutation(std::shared_ptr<base::Mutation> const& m) override;

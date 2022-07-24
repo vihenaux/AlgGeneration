@@ -34,6 +34,11 @@ void TestSolution::copy(std::shared_ptr<alggen::base::Solution> const& s)
 	value_ = std::dynamic_pointer_cast<TestSolution>(s)->value_;
 }
 
+std::shared_ptr<alggen::base::Solution> TestSolution::createCopy() const
+{
+	return std::make_shared<TestSolution>(value_);
+}
+
 void TestSolution::mutate(std::shared_ptr<alggen::base::Mutation> const& m)
 {
 	value_ += std::dynamic_pointer_cast<TestMutation>(m)->getOffset();
@@ -54,11 +59,6 @@ std::uint8_t TestSolution::getValue() const
 TestFunction::~TestFunction()
 {
 
-}
-
-std::shared_ptr<alggen::base::Solution> TestFunction::getRandomSolution() const
-{
-	return std::make_shared<TestSolution>();
 }
 
 std::uint64_t TestFunction::evaluate(std::shared_ptr<alggen::base::Solution> const& s) const

@@ -91,8 +91,8 @@ int main(int argc, char **argv)
 
 		t.expectEqual(f.getNumberOfCalls(), 3ul, "Function called 3 times");
 
-		auto sr1 = f.getRandomSolution();
-		auto sr2 = f.getRandomSolution();
+		auto sr1 = createSolution<TestSolution>(f);
+		auto sr2 = createSolution<TestSolution>(f);
 
 		t.expectDifferent(	static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr1)->getValue()),
 							static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr2)->getValue()),
@@ -169,7 +169,7 @@ int main(int argc, char **argv)
 
 		TestNeighborhood n;
 
-		auto s(f1.getRandomSolution());
+		auto s(createSolution<TestSolution>(f1));
 		n.setNewSolution(s);
 
 		auto m(n.nextNeighbor());
