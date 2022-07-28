@@ -48,6 +48,9 @@ class TestFunction : virtual public alggen::base::Function
 
 	virtual ~TestFunction() override;
 
+	virtual std::shared_ptr<alggen::base::Function> createCopy() const final;
+	virtual void copy(std::shared_ptr<Function> f) final;
+
 	protected:
 
 	virtual std::uint64_t evaluate(std::shared_ptr<alggen::base::Solution> const& s) const final;
@@ -59,12 +62,12 @@ std::shared_ptr<alggen::base::Solution> createSolution(TestFunction const&)
 	return std::make_shared<TestSolution>();
 }
 
-class TestNonOverloadedIncrementalFunction final : public alggen::base::IncrementalFunction, public TestFunction
+class TestNonOverloadedIncrementalFunction final : public TestFunction
 {
 	virtual void requiredForVTable() final;
 };
 
-class TestIncrementalFunction final : public alggen::base::IncrementalFunction, public TestFunction
+class TestIncrementalFunction final : public TestFunction
 {
 	public:
 

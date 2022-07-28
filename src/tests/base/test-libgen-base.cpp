@@ -102,6 +102,9 @@ int main(int argc, char **argv)
 		t.expectDifferent(	static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr1)->getValue()),
 							static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr2)->getValue()),
 							"Function generates random solutions");
+
+		auto f2 = f.createCopy();
+		t.expectEqual(f(s), (*f2)(s), "f(x) = copy(f)(x) function copy");
 	}
 
 	// Neighborhood class tests

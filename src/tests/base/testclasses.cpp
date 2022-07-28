@@ -66,6 +66,16 @@ TestFunction::~TestFunction()
 
 }
 
+std::shared_ptr<alggen::base::Function> TestFunction::createCopy() const
+{
+	return std::make_shared<TestFunction>();
+}
+
+void TestFunction::copy(std::shared_ptr<Function>)
+{
+
+}
+
 std::uint64_t TestFunction::evaluate(std::shared_ptr<alggen::base::Solution> const& s) const
 {
 	return static_cast<std::uint64_t>(std::dynamic_pointer_cast<TestSolution>(s)->getValue());
