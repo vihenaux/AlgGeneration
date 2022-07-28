@@ -4,6 +4,7 @@
 #include <atomic>
 #include <memory>
 
+class Solution;
 #include "solution.hpp"
 
 namespace alggen
@@ -23,9 +24,6 @@ class Function
 
 	// Get the number of solution this function evaluated
 	std::uint64_t getNumberOfCalls() const;
-
-	// Needs to return a random solution to be a starting point
-	virtual std::shared_ptr<Solution> getRandomSolution() const = 0;
 
 	protected:
 

@@ -28,9 +28,12 @@ class TestSolution final : public alggen::base::Solution
 	virtual ~TestSolution() final = default;
 
 	virtual void copy(std::shared_ptr<alggen::base::Solution> const& s) final;
+	virtual std::shared_ptr<alggen::base::Solution> createCopy() const final;
 
 	virtual void mutate(std::shared_ptr<alggen::base::Mutation> const& m) final;
 	virtual void reverseMutation(std::shared_ptr<alggen::base::Mutation> const& m) final;
+
+	virtual void randomize() override;
 
 	std::uint8_t getValue() const;
 
@@ -45,12 +48,16 @@ class TestFunction : virtual public alggen::base::Function
 
 	virtual ~TestFunction() override;
 
-	virtual std::shared_ptr<alggen::base::Solution> getRandomSolution() const final;
-
 	protected:
 
 	virtual std::uint64_t evaluate(std::shared_ptr<alggen::base::Solution> const& s) const final;
 };
+
+template<class SolutionType>
+std::shared_ptr<alggen::base::Solution> createSolution(TestFunction const&)
+{
+	return std::make_shared<TestSolution>();
+}
 
 class TestNonOverloadedIncrementalFunction final : public alggen::base::IncrementalFunction, public TestFunction
 {

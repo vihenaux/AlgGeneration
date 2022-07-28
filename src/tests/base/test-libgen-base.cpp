@@ -48,21 +48,11 @@ int main(int argc, char **argv)
 	{
 		Test t("Solution tests");
 
-		bool isConstructorRandom = false;
-		for(unsigned int i(0); i < 100; ++i)
-		{
-			TestSolution s1,s2;
-			if(s1.getValue() != s2.getValue())
-			{
-				isConstructorRandom = true;
-				break;
-			}
-		}
-
-		t.expectTrue(isConstructorRandom, "Default constructor is random");
-
 		std::shared_ptr<TestSolution> s1(new TestSolution());
 		std::shared_ptr<TestSolution> s2(new TestSolution());
+
+		t.expectDifferent(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Default constructor is random");
+
 		s2->copy(s1);
 
 		t.expectEqual(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Solution copy");
@@ -83,6 +73,11 @@ int main(int argc, char **argv)
 		s2->mutate(m);
 
 		t.expectEqual(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Mutation is coherent");
+
+		s1->randomize();
+		s2->randomize();
+
+		t.expectDifferent(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Randomize function is random");
 	}
 
 	// Function class tests
@@ -101,8 +96,8 @@ int main(int argc, char **argv)
 
 		t.expectEqual(f.getNumberOfCalls(), 3ul, "Function called 3 times");
 
-		auto sr1 = f.getRandomSolution();
-		auto sr2 = f.getRandomSolution();
+		auto sr1 = createSolution<TestSolution>(f);
+		auto sr2 = createSolution<TestSolution>(f);
 
 		t.expectDifferent(	static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr1)->getValue()),
 							static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr2)->getValue()),
@@ -179,7 +174,7 @@ int main(int argc, char **argv)
 
 		TestNeighborhood n;
 
-		auto s(f1.getRandomSolution());
+		auto s(createSolution<TestSolution>(f1));
 		n.setNewSolution(s);
 
 		auto m(n.nextNeighbor());
