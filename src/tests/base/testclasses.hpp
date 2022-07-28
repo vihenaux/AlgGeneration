@@ -33,6 +33,8 @@ class TestSolution final : public alggen::base::Solution
 	virtual void mutate(std::shared_ptr<alggen::base::Mutation> const& m) final;
 	virtual void reverseMutation(std::shared_ptr<alggen::base::Mutation> const& m) final;
 
+	virtual void randomize() override;
+
 	std::uint8_t getValue() const;
 
 	private:

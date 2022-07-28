@@ -73,6 +73,11 @@ int main(int argc, char **argv)
 		s2->mutate(m);
 
 		t.expectEqual(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Mutation is coherent");
+
+		s1->randomize();
+		s2->randomize();
+
+		t.expectDifferent(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Randomize function is random");
 	}
 
 	// Function class tests

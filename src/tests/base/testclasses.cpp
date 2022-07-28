@@ -19,9 +19,9 @@ void TestMutation::requiredForVTable()
 
 // TEST SOLUTION
 
-TestSolution::TestSolution() : value_(static_cast<uint8_t>(rand()))
+TestSolution::TestSolution() : value_(0)
 {
-
+	randomize();
 }
 
 TestSolution::TestSolution(std::uint8_t const& v) : value_(v)
@@ -47,6 +47,11 @@ void TestSolution::mutate(std::shared_ptr<alggen::base::Mutation> const& m)
 void TestSolution::reverseMutation(std::shared_ptr<alggen::base::Mutation> const& m)
 {
 	value_ -= std::dynamic_pointer_cast<TestMutation>(m)->getOffset();
+}
+
+void TestSolution::randomize()
+{
+	value_ = static_cast<uint8_t>(rand());
 }
 
 std::uint8_t TestSolution::getValue() const

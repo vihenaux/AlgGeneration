@@ -8,10 +8,7 @@ namespace solution
 
 BitString::BitString(std::size_t size) : size_(size), sol_(new bool[size])
 {
-	for(std::size_t i(0); i < size_; ++i)
-	{
-		sol_[i] = static_cast<bool>(rand()%2);
-	}
+	randomize();
 }
 
 BitString::BitString(BitString const& bt) : size_(bt.size_), sol_(new bool[bt.size_])
@@ -58,6 +55,14 @@ void BitString::reverseMutation(std::shared_ptr<base::Mutation> const& m)
 {
 	// Two consecutive same mutations = no mutation
 	mutate(m);
+}
+
+void BitString::randomize()
+{
+	for(std::size_t i(0); i < size_; ++i)
+	{
+		sol_[i] = static_cast<bool>(rand()%2);
+	}
 }
 
 } // solution namespace

@@ -82,6 +82,17 @@ int main(int argc, char **argv)
 		s2->mutate(m);
 
 		t.expectEqual((*s1)[m->getBit()], (*s2)[m->getBit()], "Mutation is coherent");
+
+
+		s1->randomize();
+		s2->randomize();
+		same = true;
+		for(std::size_t i(0); i < 265; ++i)
+		{
+			same = same && ((*s1)[i] == (*s2)[i]);
+		}
+
+		t.expectFalse(same, "Randomize function is random");
 	}
 
 
