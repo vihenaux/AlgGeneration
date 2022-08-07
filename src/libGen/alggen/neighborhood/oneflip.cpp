@@ -10,7 +10,7 @@ OneFlip::OneFlip(std::size_t bit) : bit_(bit)
 
 }
 
-void OneFlip::requiredForVTable()
+void OneFlip::requiredForVTable() const
 {
 
 }

@@ -12,7 +12,7 @@ std::int8_t TestMutation::getOffset() const
 	return offset_;
 }
 
-void TestMutation::requiredForVTable()
+void TestMutation::requiredForVTable() const
 {
 
 }

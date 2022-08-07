@@ -12,9 +12,9 @@ class TestMutation final : public alggen::base::Mutation
 
 	std::int8_t getOffset() const;
 
-	virtual void requiredForVTable() final;
-
 	private:
+
+	virtual void requiredForVTable() const final;
 
 	std::int8_t offset_{0};
 };

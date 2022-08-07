@@ -44,3 +44,18 @@ add_library(GenerationSolution ${solution})
 target_link_libraries(GenerationSolution LINK_PUBLIC GenerationBase GenerationNeighborhood)
 
 target_include_directories(GenerationSolution PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+
+###############################
+# Generation Search Algorithm #
+###############################
+
+# Enumerate every source file
+file(GLOB searchalgorithm alggen/searchalgorithm/*.cpp alggen/searchalgorithm/*.hpp)
+
+# Create library
+add_library(GenerationSearchAlgorithm ${searchalgorithm})
+
+target_link_libraries(GenerationSearchAlgorithm LINK_PUBLIC GenerationBase)
+
+target_include_directories(GenerationSearchAlgorithm PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
