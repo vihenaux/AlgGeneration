@@ -198,5 +198,17 @@ int main(int argc, char **argv)
 		t.expectEqual(f1(s), f2(s), "Implementations coherent after mutation");
 	}
 
+	// Search Algorithm class tests
+
+	{
+		Test t("Search Algorithm tests");
+
+		TestFunction f;
+		TestSearchAlgorithm sa(&f, createSolution<TestSolution>(f));
+
+		t.expectDifferent(sa(),sa(), "Different starting points; Different ending values");
+		t.expectEqual(sa(),f(sa.getResultCopy()), "Result copy");
+	}
+
 	return 0;
 }

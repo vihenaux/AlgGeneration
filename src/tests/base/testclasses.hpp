@@ -101,3 +101,15 @@ class TestNeighborhood final : public alggen::base::Neighborhood
 	std::shared_ptr<alggen::base::Solution> rootSolution_{new TestSolution()};
 	bool nextNeighbor_{false};
 };
+
+class TestSearchAlgorithm final : public alggen::base::SearchAlgorithm
+{
+	public:
+
+	TestSearchAlgorithm(alggen::base::Function * fobj, std::shared_ptr<alggen::base::Solution> s);
+	TestSearchAlgorithm(std::shared_ptr<alggen::base::Function> fobj, std::shared_ptr<alggen::base::Solution> s);
+
+	private:
+
+	virtual std::uint64_t search() const final;
+};

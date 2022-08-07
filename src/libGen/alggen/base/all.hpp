@@ -4,3 +4,4 @@
 #include "mutation.hpp"
 #include "neighborhood.hpp"
 #include "solution.hpp"
+#include "searchalgorithm.hpp"
