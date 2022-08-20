@@ -203,11 +203,11 @@ int main(int argc, char **argv)
 	{
 		Test t("Search Algorithm tests");
 
-		TestFunction f;
-		TestSearchAlgorithm sa(&f, createSolution<TestSolution>(f));
+		std::shared_ptr<TestFunction> f = std::make_shared<TestFunction>();
+		TestSearchAlgorithm sa(f, createSolution<TestSolution>(*f.get()));
 
 		t.expectDifferent(sa(),sa(), "Different starting points; Different ending values");
-		t.expectEqual(sa(),f(sa.getResultCopy()), "Result copy");
+		t.expectEqual(sa(),(*f)(sa.getResultCopy()), "Result copy");
 	}
 
 	return 0;

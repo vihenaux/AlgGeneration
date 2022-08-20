@@ -106,7 +106,6 @@ class TestSearchAlgorithm final : public alggen::base::SearchAlgorithm
 {
 	public:
 
-	TestSearchAlgorithm(alggen::base::Function * fobj, std::shared_ptr<alggen::base::Solution> s);
 	TestSearchAlgorithm(std::shared_ptr<alggen::base::Function> fobj, std::shared_ptr<alggen::base::Solution> s);
 
 	private:

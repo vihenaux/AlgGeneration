@@ -16,7 +16,6 @@ class SearchAlgorithm
 	public:
 	
 	SearchAlgorithm() = delete;
-	SearchAlgorithm(Function * fobj, std::shared_ptr<Solution> s);
 	SearchAlgorithm(std::shared_ptr<Function> fobj, std::shared_ptr<Solution> s);
 	virtual ~SearchAlgorithm() = default;
 

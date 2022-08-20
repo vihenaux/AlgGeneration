@@ -154,11 +154,6 @@ void TestNeighborhood::acceptMutationPvt(std::shared_ptr<alggen::base::Mutation>
 
 // TEST SEARCHALGORITHM
 
-TestSearchAlgorithm::TestSearchAlgorithm(alggen::base::Function * fobj, std::shared_ptr<alggen::base::Solution> s) : alggen::base::SearchAlgorithm(fobj,s)
-{
-
-}
-
 TestSearchAlgorithm::TestSearchAlgorithm(std::shared_ptr<alggen::base::Function> fobj, std::shared_ptr<alggen::base::Solution> s) : alggen::base::SearchAlgorithm(fobj,s)
 {
 
