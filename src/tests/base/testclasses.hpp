@@ -51,16 +51,12 @@ class TestFunction : virtual public alggen::base::Function
 	virtual std::shared_ptr<alggen::base::Function> createCopy() const final;
 	virtual void copy(std::shared_ptr<Function> f) final;
 
+	virtual std::shared_ptr<alggen::base::Solution> createSolution() const final;
+
 	protected:
 
 	virtual std::uint64_t evaluate(std::shared_ptr<alggen::base::Solution> const& s) const final;
 };
-
-template<class SolutionType>
-std::shared_ptr<alggen::base::Solution> createSolution(TestFunction const&)
-{
-	return std::make_shared<TestSolution>();
-}
 
 class TestNonOverloadedIncrementalFunction final : public TestFunction
 {
