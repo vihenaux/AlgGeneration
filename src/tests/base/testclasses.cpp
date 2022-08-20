@@ -12,7 +12,7 @@ std::int8_t TestMutation::getOffset() const
 	return offset_;
 }
 
-void TestMutation::requiredForVTable()
+void TestMutation::requiredForVTable() const
 {
 
 }
@@ -62,6 +62,16 @@ std::uint8_t TestSolution::getValue() const
 // TEST FUNCTION
 
 TestFunction::~TestFunction()
+{
+
+}
+
+std::shared_ptr<alggen::base::Function> TestFunction::createCopy() const
+{
+	return std::make_shared<TestFunction>();
+}
+
+void TestFunction::copy(std::shared_ptr<Function>)
 {
 
 }
@@ -140,4 +150,16 @@ void TestNeighborhood::acceptMutationPvt(std::shared_ptr<alggen::base::Mutation>
 			nextNeighbor_ = static_cast<bool>(rand()%2);
 			break;
 	}
+}
+
+// TEST SEARCHALGORITHM
+
+TestSearchAlgorithm::TestSearchAlgorithm(std::shared_ptr<alggen::base::Function> fobj, std::shared_ptr<alggen::base::Solution> s) : alggen::base::SearchAlgorithm(fobj,s)
+{
+
+}
+
+std::uint64_t TestSearchAlgorithm::search() const
+{
+	return (*fobj_)(sol_);
 }

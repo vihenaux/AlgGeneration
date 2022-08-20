@@ -16,7 +16,9 @@ class Mutation
 
 	virtual ~Mutation() = default;
 
-	virtual void requiredForVTable();
+	private:
+
+	virtual void requiredForVTable() const;
 };
 
 } // base namespace

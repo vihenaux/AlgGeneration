@@ -17,9 +17,9 @@ class OneFlip : public base::Mutation
 
 	inline std::size_t getBit() const { return bit_; }
 
-	virtual void requiredForVTable() override;
-
 	private:
+
+	virtual void requiredForVTable() const override;
 
 	std::size_t bit_;
 };

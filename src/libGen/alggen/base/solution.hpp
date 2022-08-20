@@ -2,8 +2,6 @@
 
 #include <memory>
 #include "mutation.hpp"
-
-class Function;
 #include "function.hpp"
 
 namespace alggen

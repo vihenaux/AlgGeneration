@@ -102,6 +102,9 @@ int main(int argc, char **argv)
 		t.expectDifferent(	static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr1)->getValue()),
 							static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr2)->getValue()),
 							"Function generates random solutions");
+
+		auto f2 = f.createCopy();
+		t.expectEqual(f(s), (*f2)(s), "f(x) = copy(f)(x) function copy");
 	}
 
 	// Neighborhood class tests
@@ -193,6 +196,18 @@ int main(int argc, char **argv)
 
 		t.expectEqual(f1(s), mutationEvaluation, "Function coherent between solution and mutation evaluation");
 		t.expectEqual(f1(s), f2(s), "Implementations coherent after mutation");
+	}
+
+	// Search Algorithm class tests
+
+	{
+		Test t("Search Algorithm tests");
+
+		std::shared_ptr<TestFunction> f = std::make_shared<TestFunction>();
+		TestSearchAlgorithm sa(f, createSolution<TestSolution>(*f.get()));
+
+		t.expectDifferent(sa(),sa(), "Different starting points; Different ending values");
+		t.expectEqual(sa(),(*f)(sa.getResultCopy()), "Result copy");
 	}
 
 	return 0;

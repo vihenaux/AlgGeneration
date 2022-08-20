@@ -5,7 +5,7 @@ namespace alggen
 namespace base
 {
 
-void Mutation::requiredForVTable()
+void Mutation::requiredForVTable() const
 {
 
 }
