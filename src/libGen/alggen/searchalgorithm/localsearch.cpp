@@ -24,6 +24,7 @@ std::uint64_t LocalSearch::search() const
 			score = tmpScore;
 			sol_->mutate(neighbor);
 			neighborhood_->acceptMutation(neighbor);
+			fobj_->mutateLastSolution(neighbor);
 		}
 	}
 

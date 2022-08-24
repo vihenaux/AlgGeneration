@@ -96,8 +96,8 @@ int main(int argc, char **argv)
 
 		t.expectEqual(f.getNumberOfCalls(), 3ul, "Function called 3 times");
 
-		auto sr1 = createSolution<TestSolution>(f);
-		auto sr2 = createSolution<TestSolution>(f);
+		auto sr1 = f.createSolution();
+		auto sr2 = f.createSolution();
 
 		t.expectDifferent(	static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr1)->getValue()),
 							static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr2)->getValue()),
@@ -177,7 +177,7 @@ int main(int argc, char **argv)
 
 		TestNeighborhood n;
 
-		auto s(createSolution<TestSolution>(f1));
+		auto s(f1.createSolution());
 		n.setNewSolution(s);
 
 		auto m(n.nextNeighbor());
@@ -204,7 +204,7 @@ int main(int argc, char **argv)
 		Test t("Search Algorithm tests");
 
 		std::shared_ptr<TestFunction> f = std::make_shared<TestFunction>();
-		TestSearchAlgorithm sa(f, createSolution<TestSolution>(*f.get()));
+		TestSearchAlgorithm sa(f, f->createSolution());
 
 		t.expectDifferent(sa(),sa(), "Different starting points; Different ending values");
 		t.expectEqual(sa(),(*f)(sa.getResultCopy()), "Result copy");

@@ -4,7 +4,7 @@
 #include <atomic>
 #include <memory>
 
-class Solution;
+namespace alggen { namespace base { class Solution; } }
 #include "solution.hpp"
 
 namespace alggen
@@ -32,6 +32,8 @@ class Function
 
 	virtual std::shared_ptr<Function> createCopy() const = 0;
 	virtual void copy(std::shared_ptr<Function> f) = 0;
+
+	virtual std::shared_ptr<Solution> createSolution() const = 0;
 
 	private:
 

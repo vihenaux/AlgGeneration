@@ -65,5 +65,14 @@ void BitString::randomize()
 	}
 }
 
+void BitString::print(std::ostream & out) const
+{
+	for(std::size_t i(0); i < size_; ++i)
+	{
+		out << static_cast<std::uint32_t>(sol_[i]);
+	}
+	out << "\n";
+}
+
 } // solution namespace
 } // alggen namespace
