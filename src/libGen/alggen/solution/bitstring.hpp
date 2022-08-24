@@ -34,6 +34,8 @@ class BitString : public base::Solution
 
 	virtual void randomize() override;
 
+	virtual void print(std::ostream & out) const override;
+
 	// Get the value of the bit at index
 	inline bool operator[](std::size_t index) const { return sol_[index]; }
 

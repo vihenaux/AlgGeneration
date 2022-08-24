@@ -4,7 +4,7 @@
 #include <atomic>
 #include <memory>
 
-class Solution;
+namespace alggen { namespace base { class Solution; } }
 #include "solution.hpp"
 
 namespace alggen

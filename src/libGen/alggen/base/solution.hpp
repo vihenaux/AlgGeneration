@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <memory>
 #include "mutation.hpp"
 #include "function.hpp"
@@ -29,7 +30,11 @@ class Solution
 	virtual void reverseMutation(std::shared_ptr<Mutation> const& m) = 0;
 
 	virtual void randomize() = 0;
+
+	virtual void print(std::ostream & out) const;
 };
 
 } // base namespace
 } // alggen namespace
+
+std::ostream& operator<<(std::ostream & out, std::shared_ptr<alggen::base::Solution> sol);

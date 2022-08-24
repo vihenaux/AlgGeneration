@@ -24,3 +24,11 @@ add_executable(test-libgen-solution solution/test-libgen-solution.cpp)
 target_link_libraries(test-libgen-solution LINK_PUBLIC test AlgGenSolution)
 
 install(TARGETS test-libgen-solution RUNTIME DESTINATION Release/bin)
+
+# regtests executable
+
+add_executable(test-regtests regtests/test-regtests.cpp)
+
+target_link_libraries(test-regtests LINK_PUBLIC test AlgGenProblem AlgGenSearchAlgorithm)
+
+install(TARGETS test-regtests RUNTIME DESTINATION Release/bin)

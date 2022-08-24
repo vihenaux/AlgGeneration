@@ -49,6 +49,8 @@ std::shared_ptr<alggen::base::Mutation> OneFlipNeighborhood::nextNeighborPvt()
 	neighbors_[index] = neighbors_[current_];
 	neighbors_[current_] = tmp;
 
+	++current_;
+
 	return std::make_shared<alggen::mutation::OneFlip>(tmp);
 }
 
