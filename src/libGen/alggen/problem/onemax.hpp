@@ -1,7 +1,6 @@
 #pragma once
 
 #include <alggen/base/function.hpp>
-#include <alggen/base/solution.hpp>
 #include <alggen/solution/bitstring.hpp>
 
 namespace alggen

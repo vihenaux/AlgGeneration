@@ -34,9 +34,8 @@ std::shared_ptr<base::Solution> OneMax::createSolution() const
 	return std::make_shared<solution::BitString>(size_);
 }
 
-std::uint64_t OneMax::evaluate(std::shared_ptr<base::Solution> const& s) const
+std::uint64_t OneMax::evaluate(std::shared_ptr<base::Solution> const&) const
 {
-	setNewSolution(s);
 	score_ = 0;
 	for(std::size_t i(0); i < size_; ++i)
 	{
