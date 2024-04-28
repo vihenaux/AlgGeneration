@@ -1,2 +1,4 @@
 build/
 TODO
+cmake-build-debug
+.idea

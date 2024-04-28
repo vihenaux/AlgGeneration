@@ -10,7 +10,7 @@ SearchAlgorithm::SearchAlgorithm(std::shared_ptr<Function> fobj, std::shared_ptr
 
 }
 
-void SearchAlgorithm::changeObjecitveFunction(std::shared_ptr<Function> fobj)
+void SearchAlgorithm::changeObjectiveFunction(std::shared_ptr<Function> fobj)
 {
 	fobj_ = fobj;
 }

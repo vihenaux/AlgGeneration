@@ -19,7 +19,7 @@ class SearchAlgorithm
 	SearchAlgorithm(std::shared_ptr<Function> fobj, std::shared_ptr<Solution> s);
 	virtual ~SearchAlgorithm() = default;
 
-	void changeObjecitveFunction(std::shared_ptr<Function> fobj);
+	void changeObjectiveFunction(std::shared_ptr<Function> fobj);
 
 	std::uint64_t operator()() const;
 	std::uint64_t operator()(std::shared_ptr<Solution> s) const;
