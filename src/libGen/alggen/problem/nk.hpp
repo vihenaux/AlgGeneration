@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <vector>
 #include <alggen/base/function.hpp>
 #include <alggen/solution/bitstring.hpp>
@@ -25,6 +26,8 @@ class NK : public base::Function
     virtual void copy(std::shared_ptr<base::Function> f) final;
 
     virtual std::shared_ptr<base::Solution> createSolution() const final;
+
+    virtual std::string to_string(base::Fitness const& x) const final;
 
     private:
 

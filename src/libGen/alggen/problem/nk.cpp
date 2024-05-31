@@ -118,6 +118,11 @@ std::shared_ptr<base::Solution> NK::createSolution() const
     return std::make_shared<solution::BitString>(n_);
 }
 
+std::string NK::to_string(base::Fitness const& x) const
+{
+    return std::to_string(static_cast<double>(x.get_int()) / static_cast<double>(n_*1000000));
+}
+
 base::Fitness NK::evaluate(std::shared_ptr<base::Solution> const& /*s Unused because the solution is set before*/) const
 {
     score_ = 0.;
