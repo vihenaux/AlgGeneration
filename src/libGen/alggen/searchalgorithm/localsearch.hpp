@@ -20,7 +20,7 @@ class LocalSearch : public base::SearchAlgorithm
 
 	std::shared_ptr<base::Neighborhood> neighborhood_;
 
-	virtual std::uint64_t search() const override;
+	virtual base::Fitness search() const override;
 };
 
 }

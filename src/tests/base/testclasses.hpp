@@ -55,7 +55,7 @@ class TestFunction : virtual public alggen::base::Function
 
 	protected:
 
-	virtual std::uint64_t evaluate(std::shared_ptr<alggen::base::Solution> const& s) const final;
+	virtual alggen::base::Fitness evaluate(std::shared_ptr<alggen::base::Solution> const& s) const final;
 };
 
 class TestNonOverloadedIncrementalFunction final : public TestFunction
@@ -72,11 +72,11 @@ class TestIncrementalFunction final : public TestFunction
 
 	protected:
 
-	virtual std::uint64_t incremental_evaluation(std::shared_ptr<alggen::base::Mutation> const& m) const final;
+	virtual alggen::base::Fitness incremental_evaluation(std::shared_ptr<alggen::base::Mutation> const& m) const final;
 
 	private:
 
-	mutable std::uint64_t lastSolutionEvaluation_{0};
+	mutable alggen::base::Fitness lastSolutionEvaluation_{0};
 };
 
 class TestNeighborhood final : public alggen::base::Neighborhood
@@ -106,5 +106,5 @@ class TestSearchAlgorithm final : public alggen::base::SearchAlgorithm
 
 	private:
 
-	virtual std::uint64_t search() const final;
+	virtual alggen::base::Fitness search() const final;
 };

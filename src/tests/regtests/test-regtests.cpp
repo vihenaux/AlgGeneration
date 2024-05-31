@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		auto neighborhood = std::make_shared<alggen::neighborhood::OneFlipNeighborhood>(16384);
 		alggen::searchalgorithm::LocalSearch LS(fobj,fobj->createSolution(),neighborhood);
 
-		t.expectEqual(LS(), 16384lu, "Global optimum reached");
+		t.expectEqual(LS().get_int(), 16384lu, "Global optimum reached");
 	}
 
 	return 0;

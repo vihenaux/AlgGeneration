@@ -118,7 +118,7 @@ std::shared_ptr<base::Solution> NK::createSolution() const
     return std::make_shared<solution::BitString>(n_);
 }
 
-std::uint64_t NK::evaluate(std::shared_ptr<base::Solution> const& /*s Unused because the solution is set before*/) const
+base::Fitness NK::evaluate(std::shared_ptr<base::Solution> const& /*s Unused because the solution is set before*/) const
 {
     score_ = 0.;
     for(unsigned int i(0); i < n_; ++i)
@@ -133,9 +133,9 @@ std::uint64_t NK::evaluate(std::shared_ptr<base::Solution> const& /*s Unused bec
     return score_;
 }
 
-std::uint64_t NK::incremental_evaluation(std::shared_ptr<base::Mutation> const& m) const
+base::Fitness NK::incremental_evaluation(std::shared_ptr<base::Mutation> const& m) const
 {
-    std::uint64_t score = score_;
+    base::Fitness score = score_;
     bool bitValue = sol_[std::dynamic_pointer_cast<mutation::OneFlip>(m)->getBit()];
     std::unordered_set<std::uint16_t> excluded;
 

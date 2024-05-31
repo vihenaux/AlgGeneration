@@ -21,8 +21,8 @@ class SearchAlgorithm
 
 	void changeObjectiveFunction(std::shared_ptr<Function> fobj);
 
-	std::uint64_t operator()() const;
-	std::uint64_t operator()(std::shared_ptr<Solution> s) const;
+	Fitness operator()() const;
+	Fitness operator()(std::shared_ptr<Solution> s) const;
 
 	void getResultCopy(std::shared_ptr<Solution> s) const;
 	std::shared_ptr<Solution> getResultCopy() const;
@@ -34,7 +34,7 @@ class SearchAlgorithm
 
 	private:
 
-	virtual std::uint64_t search() const = 0;
+	virtual Fitness search() const = 0;
 	virtual void requiredForVTable() const;
 
 };

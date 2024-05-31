@@ -91,8 +91,8 @@ int main(int argc, char **argv)
 
 		std::shared_ptr<TestSolution> s(new TestSolution());
 
-		t.expectEqual(static_cast<std::uint64_t>(s->getValue()), f(s), "f(x) = x");
-		t.expectEqual(f(s), f(s), "f(x) = f(x) (consistency)");
+		t.expectEqual(static_cast<std::uint64_t>(s->getValue()), f(s).get_int(), "f(x) = x");
+		t.expectEqual(f(s).get_int(), f(s).get_int(), "f(x) = f(x) (consistency)");
 
 		t.expectEqual(f.getNumberOfCalls(), 3ul, "Function called 3 times");
 
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 							"Function generates random solutions");
 
 		auto f2 = f.createCopy();
-		t.expectEqual(f(s), (*f2)(s), "f(x) = copy(f)(x) function copy");
+		t.expectEqual(f(s).get_int(), (*f2)(s).get_int(), "f(x) = copy(f)(x) function copy");
 	}
 
 	// Neighborhood class tests
@@ -182,9 +182,9 @@ int main(int argc, char **argv)
 
 		auto m(n.nextNeighbor());
 
-		t.expectDifferent(f1(s), f1(m), "Mutation has a different evaluation");
-		t.expectEqual(f1(s), f2(s), "Different implementations but same result");
-		t.expectEqual(f1(m), f2(m), "Different implementations but same result");
+		t.expectDifferent(f1(s).get_int(), f1(m).get_int(), "Mutation has a different evaluation");
+		t.expectEqual(f1(s).get_int(), f2(s).get_int(), "Different implementations but same result");
+		t.expectEqual(f1(m).get_int(), f2(m).get_int(), "Different implementations but same result");
 
 		auto mutationEvaluation = f1(m);
 
@@ -194,8 +194,8 @@ int main(int argc, char **argv)
 		s->mutate(m);
 		m = n.nextNeighbor();
 
-		t.expectEqual(f1(s), mutationEvaluation, "Function coherent between solution and mutation evaluation");
-		t.expectEqual(f1(s), f2(s), "Implementations coherent after mutation");
+		t.expectEqual(f1(s).get_int(), mutationEvaluation.get_int(), "Function coherent between solution and mutation evaluation");
+		t.expectEqual(f1(s).get_int(), f2(s).get_int(), "Implementations coherent after mutation");
 	}
 
 	// Search Algorithm class tests
@@ -206,8 +206,8 @@ int main(int argc, char **argv)
 		std::shared_ptr<TestFunction> f = std::make_shared<TestFunction>();
 		TestSearchAlgorithm sa(f, f->createSolution());
 
-		t.expectDifferent(sa(),sa(), "Different starting points; Different ending values");
-		t.expectEqual(sa(),(*f)(sa.getResultCopy()), "Result copy");
+		t.expectDifferent(sa().get_int(),sa().get_int(), "Different starting points; Different ending values");
+		t.expectEqual(sa().get_int(),(*f)(sa.getResultCopy()).get_int(), "Result copy");
 	}
 
 	return 0;

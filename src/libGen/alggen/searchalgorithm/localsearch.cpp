@@ -10,15 +10,15 @@ LocalSearch::LocalSearch(std::shared_ptr<base::Function> fobj, std::shared_ptr<b
 	
 }
 
-std::uint64_t LocalSearch::search() const
+base::Fitness LocalSearch::search() const
 {
 	neighborhood_->setNewSolution(sol_);
-	auto score = (*fobj_)(sol_);
+	base::Fitness score = (*fobj_)(sol_);
 
 	while(neighborhood_->neighborAvailable())
 	{
 		auto neighbor = neighborhood_->nextNeighbor();
-		auto tmpScore = (*fobj_)(neighbor);
+        base::Fitness tmpScore = (*fobj_)(neighbor);
 		if(score < tmpScore)
 		{
 			score = tmpScore;
