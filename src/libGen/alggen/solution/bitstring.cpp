@@ -1,5 +1,7 @@
 #include "bitstring.hpp"
 #include <alggen/neighborhood/oneflip.hpp>
+#include <fstream>
+#include <iostream>
 
 namespace alggen
 {
@@ -8,7 +10,7 @@ namespace solution
 
 BitString::BitString(std::size_t size) : size_(size), sol_(new bool[size])
 {
-	randomize();
+	BitString::randomize();
 }
 
 BitString::BitString(BitString const& bt) : size_(bt.size_), sol_(new bool[bt.size_])
@@ -17,6 +19,40 @@ BitString::BitString(BitString const& bt) : size_(bt.size_), sol_(new bool[bt.si
 	{
 		sol_[i] = bt.sol_[i];
 	}
+}
+
+BitString::BitString(std::string const& file_path) : size_(0), sol_(nullptr)
+{
+    std::ifstream input_file(file_path);
+
+    if(!input_file.is_open())
+    {
+        std::cerr << "BitString file constructor : Error cannot open file at " << file_path << std::endl;
+        return;
+    }
+
+    std::string line;
+    std::getline(input_file, line);
+
+    for(unsigned int i(0); i < line.size(); ++i)
+    {
+        if(line[i] == '0' || line[i] == '1')
+        {
+            ++size_;
+        }
+    }
+
+    sol_ = new bool[size_];
+
+    unsigned int fill_id = 0;
+    for(unsigned int i(0); i < line.size(); ++i)
+    {
+        if(line[i] == '0' || line[i] == '1')
+        {
+            sol_[fill_id] = (line[i] == '1');
+            ++fill_id;
+        }
+    }
 }
 
 BitString::~BitString()
@@ -30,6 +66,7 @@ void BitString::copy(std::shared_ptr<base::Solution> const& s)
 
 	if(derivedSol->size_ != size_)
 	{
+        size_ = derivedSol->size_;
 		delete[] sol_;
 		sol_ = new bool[size_];
 	}

@@ -2,6 +2,7 @@
 #include <unordered_set>
 #include <alggen/neighborhood/oneflip.hpp>
 #include <fstream>
+#include <iostream>
 
 namespace alggen
 {
@@ -17,6 +18,12 @@ NK::NK(std::string const& file_path) : n_(1), k_(0), k1_(1), pow2k1_(2), matrix_
 {
     std::ifstream input_file(file_path);
 
+    if(!input_file.is_open())
+    {
+        std::cerr << "NK construct from file : Error cannot open file \"" << file_path << "\"" << std::endl;
+        return;
+    }
+
     input_file >> n_ >> k_;
     k1_ = k_ + 1;
     pow2k1_ = 1 << k1_;
@@ -25,7 +32,6 @@ NK::NK(std::string const& file_path) : n_(1), k_(0), k1_(1), pow2k1_(2), matrix_
     links_.resize(n_*k1_);
     var_in_links_.resize(n_);
     sol_.copy(createSolution());
-
 
     for(unsigned int i(0); i < n_; ++i)
     {
@@ -71,7 +77,7 @@ NK::NK(std::size_t n, std::size_t k) : n_(n), k_(k), k1_(k+1), pow2k1_(1 << k1_)
 {
     for(unsigned int i(0); i < n_*pow2k1_; ++i)
     {
-        matrix_[i] = static_cast<std::uint32_t>(rand());
+        matrix_[i] = static_cast<std::uint32_t>(rand()%1000000);
     }
 
     for(unsigned int i(0); i < n_; ++i)
@@ -141,7 +147,7 @@ base::Fitness NK::evaluate(std::shared_ptr<base::Solution> const& /*s Unused bec
 base::Fitness NK::incremental_evaluation(std::shared_ptr<base::Mutation> const& m) const
 {
     base::Fitness score = score_;
-    bool bitValue = sol_[std::dynamic_pointer_cast<mutation::OneFlip>(m)->getBit()];
+    auto bitValue = std::dynamic_pointer_cast<mutation::OneFlip>(m)->getBit();
     std::unordered_set<std::uint16_t> excluded;
 
     for(unsigned int i(0); i < var_in_links_[bitValue].size(); ++i)
@@ -164,7 +170,7 @@ base::Fitness NK::incremental_evaluation(std::shared_ptr<base::Mutation> const& 
             {
                 tmp += static_cast<unsigned int>(sol_[links_[k1_*link_id+j]] << j);
             }
-            score -= matrix_[pow2k1_*link_id+tmp];
+            score += matrix_[pow2k1_*link_id+tmp];
 
             sol_.reverseMutation(m);
         }

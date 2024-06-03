@@ -32,9 +32,10 @@ class SearchAlgorithm
 	std::shared_ptr<Function> fobj_;
 	std::shared_ptr<Solution> sol_;
 
+    virtual Fitness search() const = 0;
+
 	private:
 
-	virtual Fitness search() const = 0;
 	virtual void requiredForVTable() const;
 
 };
