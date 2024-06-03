@@ -5,6 +5,115 @@ namespace alggen
 namespace base
 {
 
+Fitness::Fitness(std::uint64_t x) : fitness_(x) {}
+Fitness::Fitness(Fitness const& f) : fitness_(f.fitness_) {}
+
+Fitness& Fitness::operator+=(std::uint64_t x)
+{
+    fitness_ += x;
+    return *this;
+}
+
+Fitness& Fitness::operator+=(Fitness const &x)
+{
+    fitness_ += x.fitness_;
+    return *this;
+}
+
+Fitness Fitness::operator+(std::uint64_t x) const
+{
+    return Fitness(fitness_ + x);
+}
+
+Fitness Fitness::operator+(Fitness const &x) const
+{
+    return Fitness(fitness_ + x.fitness_);
+}
+
+Fitness& Fitness::operator-=(std::uint64_t x)
+{
+    fitness_ -= x;
+    return *this;
+}
+
+Fitness& Fitness::operator-=(Fitness const &x)
+{
+    fitness_ -= x.fitness_;
+    return *this;
+}
+
+Fitness Fitness::operator-(std::uint64_t x) const
+{
+    return Fitness(fitness_ - x);
+}
+
+Fitness Fitness::operator-(Fitness const &x) const
+{
+    return Fitness(fitness_ - x.fitness_);
+}
+
+Fitness& Fitness::operator*=(std::uint64_t x)
+{
+    fitness_ *= x;
+    return *this;
+}
+
+Fitness& Fitness::operator*=(Fitness const &x)
+{
+    fitness_ *= x.fitness_;
+    return *this;
+}
+
+Fitness Fitness::operator*(std::uint64_t x) const
+{
+    return Fitness(fitness_ * x);
+}
+
+Fitness Fitness::operator*(Fitness const &x) const
+{
+    return Fitness(fitness_ * x.fitness_);
+}
+
+Fitness& Fitness::operator/=(std::uint64_t x)
+{
+    fitness_ /= x;
+    return *this;
+}
+
+Fitness& Fitness::operator/=(Fitness const &x)
+{
+    fitness_ /= x.fitness_;
+    return *this;
+}
+
+Fitness Fitness::operator/(std::uint64_t x) const
+{
+    return Fitness(fitness_ / x);
+}
+
+Fitness Fitness::operator/(Fitness const &x) const
+{
+    return Fitness(fitness_ / x.fitness_);
+}
+
+Fitness& Fitness::operator=(std::uint64_t x)
+{
+    fitness_ = x;
+    return *this;
+}
+
+Fitness& Fitness::operator=(Fitness const &x)
+{
+    fitness_ = x.fitness_;
+    return *this;
+}
+
+std::uint64_t Fitness::get_int() const
+{
+    return fitness_;
+}
+
+
 Function::~Function()
 {
 	
@@ -20,7 +129,7 @@ void Function::solutionEvaluated() const
 	++numberOfCalls_;
 }
 
-std::uint64_t Function::operator()(std::shared_ptr<Solution> const& s) const
+Fitness Function::operator()(std::shared_ptr<Solution> const& s) const
 {
 	setNewSolution(s);
 	solutionEvaluated();
@@ -28,7 +137,7 @@ std::uint64_t Function::operator()(std::shared_ptr<Solution> const& s) const
 	return evaluate(s);
 }
 
-std::uint64_t Function::operator()(std::shared_ptr<Mutation> const& m) const
+Fitness Function::operator()(std::shared_ptr<Mutation> const& m) const
 {
 	solutionEvaluated();
 
@@ -50,11 +159,16 @@ void Function::mutateLastSolution(std::shared_ptr<Mutation> const& m) const
 	lastSolutionEvaluated_->mutate(m);
 }
 
-std::uint64_t Function::incremental_evaluation(std::shared_ptr<Mutation> const& m) const
+std::string Function::to_string(Fitness const& x) const
+{
+    return std::to_string(x.get_int());
+}
+
+Fitness Function::incremental_evaluation(std::shared_ptr<Mutation> const& m) const
 {
 	// Evaluate the solution with the mutation
 	lastSolutionEvaluated_->mutate(m);
-	std::uint64_t evalMutation = evaluate(lastSolutionEvaluated_);
+	Fitness evalMutation = evaluate(lastSolutionEvaluated_);
 	// Then reverse the mutation
 	lastSolutionEvaluated_->reverseMutation(m);
 

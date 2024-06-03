@@ -16,11 +16,10 @@ class LocalSearch : public base::SearchAlgorithm
 	LocalSearch(std::shared_ptr<base::Function> fobj, std::shared_ptr<base::Solution> s, std::shared_ptr<base::Neighborhood> n);
 	~LocalSearch() override = default;
 
-	private:
+    protected:
 
 	std::shared_ptr<base::Neighborhood> neighborhood_;
-
-	virtual std::uint64_t search() const override;
+	virtual base::Fitness search() const override;
 };
 
 }

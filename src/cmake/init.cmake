@@ -22,3 +22,7 @@ ADD_COMPILER_FLAG("-Werror")				# Do not permit any warning
 # Add optimization flags
 
 ADD_COMPILER_FLAG("-O3")
+
+# Debug flag (remove optimization flags when in use)
+
+#ADD_COMPILER_FLAG("-g")

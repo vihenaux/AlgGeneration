@@ -10,18 +10,18 @@ SearchAlgorithm::SearchAlgorithm(std::shared_ptr<Function> fobj, std::shared_ptr
 
 }
 
-void SearchAlgorithm::changeObjecitveFunction(std::shared_ptr<Function> fobj)
+void SearchAlgorithm::changeObjectiveFunction(std::shared_ptr<Function> fobj)
 {
 	fobj_ = fobj;
 }
 
-std::uint64_t SearchAlgorithm::operator()() const
+Fitness SearchAlgorithm::operator()() const
 {
 	sol_->randomize();
 	return search();
 }
 
-std::uint64_t SearchAlgorithm::operator()(std::shared_ptr<Solution> s) const
+Fitness SearchAlgorithm::operator()(std::shared_ptr<Solution> s) const
 {
 	sol_->copy(s);
 	return search();

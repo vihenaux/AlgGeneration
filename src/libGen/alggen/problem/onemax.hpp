@@ -1,7 +1,6 @@
 #pragma once
 
 #include <alggen/base/function.hpp>
-#include <alggen/base/solution.hpp>
 #include <alggen/solution/bitstring.hpp>
 
 namespace alggen
@@ -27,11 +26,11 @@ class OneMax : public base::Function
 
 	private:
 
-	virtual std::uint64_t evaluate(std::shared_ptr<base::Solution> const& s) const final;
-	virtual std::uint64_t incremental_evaluation(std::shared_ptr<base::Mutation> const& m) const final;
+	virtual base::Fitness evaluate(std::shared_ptr<base::Solution> const& s) const final;
+	virtual base::Fitness incremental_evaluation(std::shared_ptr<base::Mutation> const& m) const final;
 
 	std::size_t size_;
-	mutable std::uint64_t score_{0};
+	mutable base::Fitness score_{0};
 	mutable solution::BitString sol_;
 };
 

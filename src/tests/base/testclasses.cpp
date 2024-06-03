@@ -81,9 +81,9 @@ std::shared_ptr<alggen::base::Solution> TestFunction::createSolution() const
 	return std::make_shared<TestSolution>();
 }
 
-std::uint64_t TestFunction::evaluate(std::shared_ptr<alggen::base::Solution> const& s) const
+alggen::base::Fitness TestFunction::evaluate(std::shared_ptr<alggen::base::Solution> const& s) const
 {
-	return static_cast<std::uint64_t>(std::dynamic_pointer_cast<TestSolution>(s)->getValue());
+	return alggen::base::Fitness(std::dynamic_pointer_cast<TestSolution>(s)->getValue());
 }
 
 // TEST INCREMENTAL FUNCTIONS
@@ -103,13 +103,12 @@ void TestIncrementalFunction::setNewSolution(std::shared_ptr<alggen::base::Solut
 
 void TestIncrementalFunction::mutateLastSolution(std::shared_ptr<alggen::base::Mutation> const& m) const
 {
-	lastSolutionEvaluation_ = static_cast<std::uint64_t>(
-								static_cast<std::int64_t>(lastSolutionEvaluation_) + std::dynamic_pointer_cast<TestMutation>(m)->getOffset());
+	lastSolutionEvaluation_ += static_cast<std::uint64_t>(std::dynamic_pointer_cast<TestMutation>(m)->getOffset());
 }
 
-std::uint64_t TestIncrementalFunction::incremental_evaluation(std::shared_ptr<alggen::base::Mutation> const& m) const
+alggen::base::Fitness TestIncrementalFunction::incremental_evaluation(std::shared_ptr<alggen::base::Mutation> const& m) const
 {
-	return static_cast<std::uint64_t>(static_cast<std::int64_t>(lastSolutionEvaluation_) + std::dynamic_pointer_cast<TestMutation>(m)->getOffset());
+	return lastSolutionEvaluation_ + static_cast<std::uint64_t>(std::dynamic_pointer_cast<TestMutation>(m)->getOffset());
 }
 
 // TEST NEIGHBORHOOD
@@ -164,7 +163,7 @@ TestSearchAlgorithm::TestSearchAlgorithm(std::shared_ptr<alggen::base::Function>
 
 }
 
-std::uint64_t TestSearchAlgorithm::search() const
+alggen::base::Fitness TestSearchAlgorithm::search() const
 {
 	return (*fobj_)(sol_);
 }

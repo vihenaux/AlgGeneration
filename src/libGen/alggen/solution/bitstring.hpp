@@ -4,6 +4,7 @@
 #include <memory>
 #include <alggen/base/mutation.hpp>
 #include <alggen/base/solution.hpp>
+#include <string>
 
 namespace alggen
 {
@@ -21,6 +22,7 @@ class BitString : public base::Solution
 	BitString(std::size_t size);
 	BitString(base::Solution const& s) = delete;
 	BitString(BitString const& bt);
+    BitString(std::string const& file_path);
 
 	virtual ~BitString() override;
 

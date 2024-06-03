@@ -34,9 +34,8 @@ std::shared_ptr<base::Solution> OneMax::createSolution() const
 	return std::make_shared<solution::BitString>(size_);
 }
 
-std::uint64_t OneMax::evaluate(std::shared_ptr<base::Solution> const& s) const
+base::Fitness OneMax::evaluate(std::shared_ptr<base::Solution> const&) const
 {
-	setNewSolution(s);
 	score_ = 0;
 	for(std::size_t i(0); i < size_; ++i)
 	{
@@ -45,7 +44,7 @@ std::uint64_t OneMax::evaluate(std::shared_ptr<base::Solution> const& s) const
 	return score_;
 }
 
-std::uint64_t OneMax::incremental_evaluation(std::shared_ptr<base::Mutation> const& m) const
+base::Fitness OneMax::incremental_evaluation(std::shared_ptr<base::Mutation> const& m) const
 {
 	bool bitValue = sol_[std::dynamic_pointer_cast<mutation::OneFlip>(m)->getBit()];
 	return score_ - bitValue + !bitValue;
