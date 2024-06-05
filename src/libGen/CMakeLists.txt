@@ -41,7 +41,7 @@ file(GLOB solution alggen/solution/*.cpp alggen/solution/*.hpp)
 # Create library
 add_library(AlgGenSolution ${solution})
 
-target_link_libraries(AlgGenSolution LINK_PUBLIC AlgGenBase AlgGenNeighborhood)
+target_link_libraries(AlgGenSolution LINK_PUBLIC AlgGenBase AlgGenNeighborhood AlgGenProblem)
 
 target_include_directories(AlgGenSolution PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

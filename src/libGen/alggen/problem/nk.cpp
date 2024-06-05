@@ -75,20 +75,7 @@ NK::NK(std::string const& file_path) : n_(1), k_(0), k1_(1), pow2k1_(2), matrix_
 
 NK::NK(std::size_t n, std::size_t k) : n_(n), k_(k), k1_(k+1), pow2k1_(1 << k1_), matrix_(n_*pow2k1_), links_(n_*k1_), var_in_links_(n_), sol_(n_)
 {
-    for(unsigned int i(0); i < n_*pow2k1_; ++i)
-    {
-        matrix_[i] = static_cast<std::uint32_t>(rand()%1000000);
-    }
-
-    for(unsigned int i(0); i < n_; ++i)
-    {
-        for(unsigned int j(0); j < k1_; ++j)
-        {
-            std::uint16_t var = static_cast<std::uint16_t>(static_cast<std::uint16_t>(rand())%n_);
-            links_[i*k1_+j] = var;
-            var_in_links_[var].push_back(static_cast<std::uint16_t>(i));
-        }
-    }
+    randomize();
 }
 
 void NK::setNewSolution(std::shared_ptr<base::Solution> const& s) const
@@ -127,6 +114,29 @@ std::shared_ptr<base::Solution> NK::createSolution() const
 std::string NK::to_string(base::Fitness const& x) const
 {
     return std::to_string(static_cast<double>(x.get_int()) / static_cast<double>(n_*1000000));
+}
+
+void NK::randomize()
+{
+    for(unsigned int i(0); i < n_*pow2k1_; ++i)
+    {
+        matrix_[i] = static_cast<std::uint32_t>(rand()%1000000);
+    }
+
+    for(unsigned int i(0); i < n_; ++i)
+    {
+        var_in_links_[i].clear();
+    }
+
+    for(unsigned int i(0); i < n_; ++i)
+    {
+        for(unsigned int j(0); j < k1_; ++j)
+        {
+            std::uint16_t var = static_cast<std::uint16_t>(static_cast<std::uint16_t>(rand())%n_);
+            links_[i*k1_+j] = var;
+            var_in_links_[var].push_back(static_cast<std::uint16_t>(i));
+        }
+    }
 }
 
 base::Fitness NK::evaluate(std::shared_ptr<base::Solution> const& /*s Unused because the solution is set before*/) const

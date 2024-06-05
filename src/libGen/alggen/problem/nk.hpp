@@ -18,6 +18,7 @@ class NK : public base::Function
     NK(NK const& nk);
     NK(std::string const& file_path);
     NK(std::size_t n, std::size_t k);
+    virtual ~NK() override = default;
 
     virtual void setNewSolution(std::shared_ptr<base::Solution> const& s) const final;
     virtual void mutateLastSolution(std::shared_ptr<base::Mutation> const& m) const final;
@@ -28,6 +29,10 @@ class NK : public base::Function
     virtual std::shared_ptr<base::Solution> createSolution() const final;
 
     virtual std::string to_string(base::Fitness const& x) const final;
+
+    protected:
+
+    void randomize();
 
     private:
 
