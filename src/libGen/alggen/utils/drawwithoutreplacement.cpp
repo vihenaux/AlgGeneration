@@ -18,6 +18,23 @@ DrawWithoutReplacement::~DrawWithoutReplacement()
     delete[] tab_;
 }
 
+DrawWithoutReplacement& DrawWithoutReplacement::operator=(DrawWithoutReplacement const& dwr)
+{
+    delete[] tab_;
+
+    min_ = dwr.min_;
+    nb_generated_ = 0;
+    tab_size_ = dwr.tab_size_;
+    tab_ = new std::uint32_t[tab_size_];
+
+    for(std::uint32_t i(0); i < tab_size_; ++i)
+    {
+        tab_[i] = min_+i;
+    }
+
+    return *this;
+}
+
 std::uint32_t DrawWithoutReplacement::operator()(std::default_random_engine &generator)
 {
     nb_generated_ %= tab_size_;

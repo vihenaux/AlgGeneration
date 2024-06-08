@@ -32,11 +32,15 @@ void NKModel::copySolution(std::shared_ptr<base::Solution> const& s)
 	auto derivedSol = std::dynamic_pointer_cast<NKModel>(s);
 
     problem::NK::copyFunction(derivedSol);
+    matrix_distribution_ = utils::DrawWithoutReplacement(0u, static_cast<std::uint32_t>(n_*pow2k1_-1));
+    links_distribution_ = utils::DrawWithoutReplacement(0u, static_cast<std::uint32_t>(n_*k_));
 }
 
 void NKModel::copyFunction(std::shared_ptr<base::Function> f)
 {
 	copySolution(std::dynamic_pointer_cast<NKModel>(f));
+    matrix_distribution_ = utils::DrawWithoutReplacement(0u, static_cast<std::uint32_t>(n_*pow2k1_-1));
+    links_distribution_ = utils::DrawWithoutReplacement(0u, static_cast<std::uint32_t>(n_*k_));
 }
 
 std::shared_ptr<base::Solution> NKModel::createSolutionCopy() const

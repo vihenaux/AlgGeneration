@@ -14,6 +14,8 @@ class DrawWithoutReplacement
     DrawWithoutReplacement(std::uint32_t min, std::uint32_t max);
     ~DrawWithoutReplacement();
 
+    DrawWithoutReplacement& operator=(DrawWithoutReplacement const& dwr);
+
     std::uint32_t operator()(std::default_random_engine &generator);
     void reset();
 
