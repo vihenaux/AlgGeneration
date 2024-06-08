@@ -28,8 +28,8 @@ class BitString : public base::Solution
 
 	BitString& operator=(base::Solution const& s) = delete;
 
-	virtual void copy(std::shared_ptr<base::Solution> const& s) override;
-	virtual std::shared_ptr<base::Solution> createCopy() const override;
+	virtual void copySolution(std::shared_ptr<base::Solution> const& s) override;
+	virtual std::shared_ptr<base::Solution> createSolutionCopy() const override;
 
 	virtual void mutate(std::shared_ptr<base::Mutation> const& m) override;
 	virtual void reverseMutation(std::shared_ptr<base::Mutation> const& m) override;

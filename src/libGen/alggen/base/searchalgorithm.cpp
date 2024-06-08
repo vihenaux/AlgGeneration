@@ -23,18 +23,18 @@ Fitness SearchAlgorithm::operator()() const
 
 Fitness SearchAlgorithm::operator()(std::shared_ptr<Solution> s) const
 {
-	sol_->copy(s);
+	sol_->copySolution(s);
 	return search();
 }
 
 void SearchAlgorithm::getResultCopy(std::shared_ptr<Solution> s) const
 {
-	s->copy(sol_);
+	s->copySolution(sol_);
 }
 
 std::shared_ptr<Solution> SearchAlgorithm::getResultCopy() const
 {
-	return sol_->createCopy();
+	return sol_->createSolutionCopy();
 }
 
 void SearchAlgorithm::requiredForVTable() const

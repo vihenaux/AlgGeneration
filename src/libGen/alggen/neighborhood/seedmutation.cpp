@@ -17,6 +17,9 @@ void SeedMutation::requiredForVTable() const
 
 } // mutation namespace
 
+namespace neighborhood
+{
+
 SeedNeighborhood::SeedNeighborhood()
 {
 
@@ -27,17 +30,17 @@ bool SeedNeighborhood::neighborAvailable() const
     return true;
 }
 
-void SeedNeighborhood::setNewSolutionPvt(std::shared_ptr<alggen::base::Solution> const& s)
+void SeedNeighborhood::setNewSolutionPvt(std::shared_ptr<alggen::base::Solution> const&)
 {
 
 }
 
-SeedNeighborhood::std::shared_ptr<alggen::base::Mutation> nextNeighborPvt()
+std::shared_ptr<alggen::base::Mutation> SeedNeighborhood::nextNeighborPvt()
 {
 	return std::make_shared<alggen::mutation::SeedMutation>(rand());
 }
 
-void SeedNeighborhood::acceptMutationPvt(std::shared_ptr<alggen::base::Mutation> const& m)
+void SeedNeighborhood::acceptMutationPvt(std::shared_ptr<alggen::base::Mutation> const&)
 {
 
 }

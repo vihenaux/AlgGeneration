@@ -11,7 +11,7 @@ IteratedLocalSearch::IteratedLocalSearch(std::shared_ptr <base::Function> fobj, 
 
 base::Fitness IteratedLocalSearch::search() const
 {
-    auto bestSolution = sol_->createCopy();
+    auto bestSolution = sol_->createSolutionCopy();
     base::Fitness best = (*fobj_)(sol_);
 
     while(fobj_->getNumberOfCalls() < max_fobj_calls_)
@@ -20,7 +20,7 @@ base::Fitness IteratedLocalSearch::search() const
         if(lsResult > best)
         {
             best = lsResult;
-            bestSolution->copy(sol_);
+            bestSolution->copySolution(sol_);
         }
 
         neighborhood_->setNewSolution(sol_);
@@ -33,7 +33,7 @@ base::Fitness IteratedLocalSearch::search() const
         }
     }
 
-    sol_->copy(bestSolution);
+    sol_->copySolution(bestSolution);
     return best;
 }
 

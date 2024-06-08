@@ -10,7 +10,7 @@ OneMax::OneMax(std::size_t size) : size_(size), sol_(size) {}
 
 void OneMax::setNewSolution(std::shared_ptr<base::Solution> const& s) const
 {
-	sol_.copy(s);
+	sol_.copySolution(s);
 }
 
 void OneMax::mutateLastSolution(std::shared_ptr<base::Mutation> const& m) const
@@ -19,12 +19,12 @@ void OneMax::mutateLastSolution(std::shared_ptr<base::Mutation> const& m) const
 	sol_.mutate(m);
 }
 
-std::shared_ptr<base::Function> OneMax::createCopy() const
+std::shared_ptr<base::Function> OneMax::createFunctionCopy() const
 {
 	return std::make_shared<OneMax>(size_);
 }
 
-void OneMax::copy(std::shared_ptr<base::Function> f)
+void OneMax::copyFunction(std::shared_ptr<base::Function> f)
 {
 	size_ = std::dynamic_pointer_cast<OneMax>(f)->size_;
 }

@@ -31,7 +31,7 @@ NK::NK(std::string const& file_path) : n_(1), k_(0), k1_(1), pow2k1_(2), matrix_
     matrix_.resize(n_*pow2k1_);
     links_.resize(n_*k1_);
     var_in_links_.resize(n_);
-    sol_.copy(createSolution());
+    sol_.copySolution(createSolution());
 
     for(unsigned int i(0); i < n_; ++i)
     {
@@ -80,7 +80,7 @@ NK::NK(std::size_t n, std::size_t k) : n_(n), k_(k), k1_(k+1), pow2k1_(1 << k1_)
 
 void NK::setNewSolution(std::shared_ptr<base::Solution> const& s) const
 {
-    sol_.copy(s);
+    sol_.copySolution(s);
 }
 
 void NK::mutateLastSolution(std::shared_ptr<base::Mutation> const& m) const
@@ -89,12 +89,12 @@ void NK::mutateLastSolution(std::shared_ptr<base::Mutation> const& m) const
     sol_.mutate(m);
 }
 
-std::shared_ptr<base::Function> NK::createCopy() const
+std::shared_ptr<base::Function> NK::createFunctionCopy() const
 {
     return std::make_shared<NK>(*this);
 }
 
-void NK::copy(std::shared_ptr<base::Function> f)
+void NK::copyFunction(std::shared_ptr<base::Function> f)
 {
     std::shared_ptr<NK> nk = std::dynamic_pointer_cast<NK>(f);
     n_ = nk->n_;

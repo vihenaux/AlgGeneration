@@ -55,8 +55,8 @@ int main(int argc, char **argv)
 
 		t.expectFalse(same, "Default constructor is random");
 
-		s2->copy(s1);
-		std::shared_ptr<alggen::solution::BitString> s3 = std::dynamic_pointer_cast<alggen::solution::BitString>(s1->createCopy());
+		s2->copySolution(s1);
+		std::shared_ptr<alggen::solution::BitString> s3 = std::dynamic_pointer_cast<alggen::solution::BitString>(s1->createSolutionCopy());
 
 		same = true;
 		bool createCopy = true;

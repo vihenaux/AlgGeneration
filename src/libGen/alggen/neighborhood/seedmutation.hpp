@@ -28,20 +28,20 @@ class SeedMutation : public base::Mutation
 namespace neighborhood
 {
 
-class SeedNeighborhood final : public alggen::base::Neighborhood
+class SeedNeighborhood : public alggen::base::Neighborhood
 {
 	public:
 
 	SeedNeighborhood();
-	virtual ~SeedNeighborhood() final = default;
+	virtual ~SeedNeighborhood() override = default;
 
 	virtual bool neighborAvailable() const final;
 
 	private:
 
-	virtual void setNewSolutionPvt(std::shared_ptr<alggen::base::Solution> const& s) final;
-	virtual std::shared_ptr<alggen::base::Mutation> nextNeighborPvt() final;
-	virtual void acceptMutationPvt(std::shared_ptr<alggen::base::Mutation> const& m) final;
+	virtual void setNewSolutionPvt(std::shared_ptr<alggen::base::Solution> const& s) override;
+	virtual std::shared_ptr<alggen::base::Mutation> nextNeighborPvt() override;
+	virtual void acceptMutationPvt(std::shared_ptr<alggen::base::Mutation> const& m) override;
 };
 
 } // neighborhood namespace

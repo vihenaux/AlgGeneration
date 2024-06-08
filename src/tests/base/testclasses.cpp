@@ -29,12 +29,12 @@ TestSolution::TestSolution(std::uint8_t const& v) : value_(v)
 
 }
 
-void TestSolution::copy(std::shared_ptr<alggen::base::Solution> const& s)
+void TestSolution::copySolution(std::shared_ptr<alggen::base::Solution> const& s)
 {
 	value_ = std::dynamic_pointer_cast<TestSolution>(s)->value_;
 }
 
-std::shared_ptr<alggen::base::Solution> TestSolution::createCopy() const
+std::shared_ptr<alggen::base::Solution> TestSolution::createSolutionCopy() const
 {
 	return std::make_shared<TestSolution>(value_);
 }
@@ -66,12 +66,12 @@ TestFunction::~TestFunction()
 
 }
 
-std::shared_ptr<alggen::base::Function> TestFunction::createCopy() const
+std::shared_ptr<alggen::base::Function> TestFunction::createFunctionCopy() const
 {
 	return std::make_shared<TestFunction>();
 }
 
-void TestFunction::copy(std::shared_ptr<Function>)
+void TestFunction::copyFunction(std::shared_ptr<Function>)
 {
 
 }
@@ -120,7 +120,7 @@ TestNeighborhood::~TestNeighborhood()
 
 void TestNeighborhood::setNewSolutionPvt(std::shared_ptr<alggen::base::Solution> const& s)
 {
-	rootSolution_->copy(s);
+	rootSolution_->copySolution(s);
 }
 
 bool TestNeighborhood::neighborAvailable() const
