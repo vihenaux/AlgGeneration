@@ -21,7 +21,7 @@ install(TARGETS test-libgen-base RUNTIME DESTINATION Release/bin)
 
 add_executable(test-libgen-solution solution/test-libgen-solution.cpp)
 
-target_link_libraries(test-libgen-solution LINK_PUBLIC test AlgGenSolution)
+target_link_libraries(test-libgen-solution LINK_PUBLIC test AlgGenSolution AlgGenNeighborhood)
 
 install(TARGETS test-libgen-solution RUNTIME DESTINATION Release/bin)
 

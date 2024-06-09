@@ -55,6 +55,9 @@ std::shared_ptr<base::Function> NKModel::createFunctionCopy() const
 
 void NKModel::mutate(std::shared_ptr<base::Mutation> const& m)
 {
+    matrix_distribution_.reset();
+    links_distribution_.reset();
+
     auto mutation = std::dynamic_pointer_cast<alggen::mutation::NKSeedMutation>(m);
 	std::default_random_engine generator(mutation->getSeed());
 
@@ -94,6 +97,9 @@ void NKModel::mutate(std::shared_ptr<base::Mutation> const& m)
 
 void NKModel::reverseMutation(std::shared_ptr<base::Mutation> const& m)
 {
+    matrix_distribution_.reset();
+    links_distribution_.reset();
+
     auto mutation = std::dynamic_pointer_cast<alggen::mutation::NKSeedMutation>(m);
 	std::default_random_engine generator(mutation->getSeed());
 
@@ -134,6 +140,11 @@ void NKModel::reverseMutation(std::shared_ptr<base::Mutation> const& m)
 void NKModel::randomize()
 {
     problem::NK::randomize();
+}
+
+void NKModel::print(std::ostream & out) const
+{
+    NK::print(out);
 }
 
 } // solution namespace

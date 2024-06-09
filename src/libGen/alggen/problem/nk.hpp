@@ -30,6 +30,8 @@ class NK : public base::Function
 
     virtual std::string to_string(base::Fitness const& x) const final;
 
+	void print(std::ostream & out) const;
+
     protected:
 
     void randomize();

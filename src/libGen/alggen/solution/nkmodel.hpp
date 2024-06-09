@@ -35,6 +35,7 @@ class NKModel : public base::Solution, public problem::NK
     virtual void reverseMutation(std::shared_ptr<base::Mutation> const& m) override;
 
     virtual void randomize() override;
+    virtual void print(std::ostream & out) const override;
 
     private:
 

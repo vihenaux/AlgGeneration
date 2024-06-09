@@ -189,5 +189,27 @@ base::Fitness NK::incremental_evaluation(std::shared_ptr<base::Mutation> const& 
     return score;
 }
 
+void NK::print(std::ostream & out) const
+{
+    out << "Links :" << std::endl;
+    for(unsigned int i(0); i < n_; ++i)
+    {
+        for(unsigned int j(0); j < k1_; ++j)
+        {
+            out << links_[i*k_+j] << " ";
+        }
+        out << std::endl;
+    }
+    out << "Matrix :" << std::endl;
+    for(unsigned int i(0); i < n_; ++i)
+    {
+        for(unsigned int j(0); j < pow2k1_; ++j)
+        {
+            out << matrix_[i*pow2k1_+j] << " ";
+        }
+        out << std::endl;
+    }
+}
+
 }
 }

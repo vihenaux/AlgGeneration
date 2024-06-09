@@ -7,10 +7,7 @@ namespace utils
 
 DrawWithoutReplacement::DrawWithoutReplacement(std::uint32_t min, std::uint32_t max) : min_(min), tab_size_(max-min), tab_(new std::uint32_t[tab_size_])
 {
-    for(std::uint32_t i(0); i < tab_size_; ++i)
-    {
-        tab_[i] = min_+i;
-    }
+    reset();
 }
 
 DrawWithoutReplacement::~DrawWithoutReplacement()
@@ -54,6 +51,11 @@ std::uint32_t DrawWithoutReplacement::operator()(std::default_random_engine &gen
 void DrawWithoutReplacement::reset()
 {
     nb_generated_ = 0;
+
+    for(std::uint32_t i(0); i < tab_size_; ++i)
+    {
+        tab_[i] = min_+i;
+    }
 }
 
 }
