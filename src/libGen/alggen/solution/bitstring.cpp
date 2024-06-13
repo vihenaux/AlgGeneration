@@ -60,7 +60,7 @@ BitString::~BitString()
 	delete[] sol_;
 }
 
-void BitString::copy(std::shared_ptr<base::Solution> const& s)
+void BitString::copySolution(std::shared_ptr<base::Solution> const& s)
 {
 	auto derivedSol = std::dynamic_pointer_cast<BitString>(s);
 
@@ -77,7 +77,7 @@ void BitString::copy(std::shared_ptr<base::Solution> const& s)
 	}
 }
 
-std::shared_ptr<base::Solution> BitString::createCopy() const
+std::shared_ptr<base::Solution> BitString::createSolutionCopy() const
 {
 	return std::make_shared<BitString>(*this);
 }

@@ -82,8 +82,8 @@ class Function
 	virtual void setNewSolution(std::shared_ptr<Solution> const& s) const;
 	virtual void mutateLastSolution(std::shared_ptr<Mutation> const& m) const;
 
-	virtual std::shared_ptr<Function> createCopy() const = 0;
-	virtual void copy(std::shared_ptr<Function> f) = 0;
+	virtual std::shared_ptr<Function> createFunctionCopy() const = 0;
+	virtual void copyFunction(std::shared_ptr<Function> f) = 0;
 
 	virtual std::shared_ptr<Solution> createSolution() const = 0;
 

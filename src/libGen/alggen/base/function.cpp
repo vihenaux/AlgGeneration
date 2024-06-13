@@ -148,9 +148,9 @@ void Function::setNewSolution(std::shared_ptr<Solution> const& s) const
 {
 	if(!lastSolutionEvaluated_)
 	{
-		lastSolutionEvaluated_ = s->createCopy();
+		lastSolutionEvaluated_ = s->createSolutionCopy();
 	} else {
-		lastSolutionEvaluated_->copy(s);
+		lastSolutionEvaluated_->copySolution(s);
 	}
 }
 

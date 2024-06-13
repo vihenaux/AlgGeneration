@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 
 		t.expectDifferent(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Default constructor is random");
 
-		s2->copy(s1);
+		s2->copySolution(s1);
 
 		t.expectEqual(static_cast<std::uint16_t>(s1->getValue()), static_cast<std::uint16_t>(s2->getValue()), "Solution copy");
 
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
 							static_cast<std::uint16_t>(std::dynamic_pointer_cast<TestSolution>(sr2)->getValue()),
 							"Function generates random solutions");
 
-		auto f2 = f.createCopy();
+		auto f2 = f.createFunctionCopy();
 		t.expectEqual(f(s).get_int(), (*f2)(s).get_int(), "f(x) = copy(f)(x) function copy");
 	}
 

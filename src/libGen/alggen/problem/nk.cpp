@@ -31,7 +31,7 @@ NK::NK(std::string const& file_path) : n_(1), k_(0), k1_(1), pow2k1_(2), matrix_
     matrix_.resize(n_*pow2k1_);
     links_.resize(n_*k1_);
     var_in_links_.resize(n_);
-    sol_.copy(createSolution());
+    sol_.copySolution(createSolution());
 
     for(unsigned int i(0); i < n_; ++i)
     {
@@ -75,25 +75,12 @@ NK::NK(std::string const& file_path) : n_(1), k_(0), k1_(1), pow2k1_(2), matrix_
 
 NK::NK(std::size_t n, std::size_t k) : n_(n), k_(k), k1_(k+1), pow2k1_(1 << k1_), matrix_(n_*pow2k1_), links_(n_*k1_), var_in_links_(n_), sol_(n_)
 {
-    for(unsigned int i(0); i < n_*pow2k1_; ++i)
-    {
-        matrix_[i] = static_cast<std::uint32_t>(rand()%1000000);
-    }
-
-    for(unsigned int i(0); i < n_; ++i)
-    {
-        for(unsigned int j(0); j < k1_; ++j)
-        {
-            std::uint16_t var = static_cast<std::uint16_t>(static_cast<std::uint16_t>(rand())%n_);
-            links_[i*k1_+j] = var;
-            var_in_links_[var].push_back(static_cast<std::uint16_t>(i));
-        }
-    }
+    randomize();
 }
 
 void NK::setNewSolution(std::shared_ptr<base::Solution> const& s) const
 {
-    sol_.copy(s);
+    sol_.copySolution(s);
 }
 
 void NK::mutateLastSolution(std::shared_ptr<base::Mutation> const& m) const
@@ -102,12 +89,12 @@ void NK::mutateLastSolution(std::shared_ptr<base::Mutation> const& m) const
     sol_.mutate(m);
 }
 
-std::shared_ptr<base::Function> NK::createCopy() const
+std::shared_ptr<base::Function> NK::createFunctionCopy() const
 {
     return std::make_shared<NK>(*this);
 }
 
-void NK::copy(std::shared_ptr<base::Function> f)
+void NK::copyFunction(std::shared_ptr<base::Function> f)
 {
     std::shared_ptr<NK> nk = std::dynamic_pointer_cast<NK>(f);
     n_ = nk->n_;
@@ -127,6 +114,29 @@ std::shared_ptr<base::Solution> NK::createSolution() const
 std::string NK::to_string(base::Fitness const& x) const
 {
     return std::to_string(static_cast<double>(x.get_int()) / static_cast<double>(n_*1000000));
+}
+
+void NK::randomize()
+{
+    for(unsigned int i(0); i < n_*pow2k1_; ++i)
+    {
+        matrix_[i] = static_cast<std::uint32_t>(rand()%1000000);
+    }
+
+    for(unsigned int i(0); i < n_; ++i)
+    {
+        var_in_links_[i].clear();
+    }
+
+    for(unsigned int i(0); i < n_; ++i)
+    {
+        for(unsigned int j(0); j < k1_; ++j)
+        {
+            std::uint16_t var = static_cast<std::uint16_t>(static_cast<std::uint16_t>(rand())%n_);
+            links_[i*k1_+j] = var;
+            var_in_links_[var].push_back(static_cast<std::uint16_t>(i));
+        }
+    }
 }
 
 base::Fitness NK::evaluate(std::shared_ptr<base::Solution> const& /*s Unused because the solution is set before*/) const
@@ -177,6 +187,28 @@ base::Fitness NK::incremental_evaluation(std::shared_ptr<base::Mutation> const& 
     }
 
     return score;
+}
+
+void NK::print(std::ostream & out) const
+{
+    out << "Links :" << std::endl;
+    for(unsigned int i(0); i < n_; ++i)
+    {
+        for(unsigned int j(0); j < k1_; ++j)
+        {
+            out << links_[i*k_+j] << " ";
+        }
+        out << std::endl;
+    }
+    out << "Matrix :" << std::endl;
+    for(unsigned int i(0); i < n_; ++i)
+    {
+        for(unsigned int j(0); j < pow2k1_; ++j)
+        {
+            out << matrix_[i*pow2k1_+j] << " ";
+        }
+        out << std::endl;
+    }
 }
 
 }

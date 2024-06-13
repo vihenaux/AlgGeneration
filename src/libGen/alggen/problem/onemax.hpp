@@ -19,8 +19,8 @@ class OneMax : public base::Function
 	virtual void setNewSolution(std::shared_ptr<base::Solution> const& s) const final;
 	virtual void mutateLastSolution(std::shared_ptr<base::Mutation> const& m) const final;
 
-	virtual std::shared_ptr<base::Function> createCopy() const final;
-	virtual void copy(std::shared_ptr<base::Function> f) final;
+	virtual std::shared_ptr<base::Function> createFunctionCopy() const final;
+	virtual void copyFunction(std::shared_ptr<base::Function> f) final;
 
 	virtual std::shared_ptr<base::Solution> createSolution() const final;
 

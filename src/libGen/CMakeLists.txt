@@ -3,6 +3,19 @@ include(../cmake/init.cmake)
 project(libAlgGen VERSION 0.0)
 
 
+####################
+# Generation Utils #
+####################
+
+# Enumerate every source file
+file(GLOB utils alggen/utils/*.cpp alggen/utils/*.hpp)
+
+# Create library
+add_library(AlgGenUtils ${utils})
+
+target_include_directories(AlgGenUtils PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+
 ###################
 # Generation Base #
 ###################
@@ -41,7 +54,7 @@ file(GLOB solution alggen/solution/*.cpp alggen/solution/*.hpp)
 # Create library
 add_library(AlgGenSolution ${solution})
 
-target_link_libraries(AlgGenSolution LINK_PUBLIC AlgGenBase AlgGenNeighborhood)
+target_link_libraries(AlgGenSolution LINK_PUBLIC AlgGenBase AlgGenNeighborhood AlgGenProblem AlgGenUtils)
 
 target_include_directories(AlgGenSolution PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -59,7 +72,6 @@ add_library(AlgGenSearchAlgorithm ${searchalgorithm})
 target_link_libraries(AlgGenSearchAlgorithm LINK_PUBLIC AlgGenBase)
 
 target_include_directories(AlgGenSearchAlgorithm PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-
 
 
 ######################

@@ -27,8 +27,8 @@ class TestSolution final : public alggen::base::Solution
 	TestSolution(std::uint8_t const& v);
 	virtual ~TestSolution() final = default;
 
-	virtual void copy(std::shared_ptr<alggen::base::Solution> const& s) final;
-	virtual std::shared_ptr<alggen::base::Solution> createCopy() const final;
+	virtual void copySolution(std::shared_ptr<alggen::base::Solution> const& s) final;
+	virtual std::shared_ptr<alggen::base::Solution> createSolutionCopy() const final;
 
 	virtual void mutate(std::shared_ptr<alggen::base::Mutation> const& m) final;
 	virtual void reverseMutation(std::shared_ptr<alggen::base::Mutation> const& m) final;
@@ -48,8 +48,8 @@ class TestFunction : virtual public alggen::base::Function
 
 	virtual ~TestFunction() override;
 
-	virtual std::shared_ptr<alggen::base::Function> createCopy() const final;
-	virtual void copy(std::shared_ptr<Function> f) final;
+	virtual std::shared_ptr<alggen::base::Function> createFunctionCopy() const final;
+	virtual void copyFunction(std::shared_ptr<Function> f) final;
 
 	virtual std::shared_ptr<alggen::base::Solution> createSolution() const final;
 
