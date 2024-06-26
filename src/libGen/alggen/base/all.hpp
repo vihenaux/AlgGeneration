@@ -5,3 +5,4 @@
 #include "neighborhood.hpp"
 #include "solution.hpp"
 #include "searchalgorithm.hpp"
+#include "model.hpp"

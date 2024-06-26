@@ -87,3 +87,18 @@ add_library(AlgGenProblem ${problem})
 target_link_libraries(AlgGenProblem LINK_PUBLIC AlgGenBase AlgGenNeighborhood AlgGenSolution)
 
 target_include_directories(AlgGenProblem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+
+########################
+# Generation Selection #
+########################
+
+# Enumerate every source file
+file(GLOB selection alggen/selection/*.cpp alggen/selection/*.hpp)
+
+# Create library
+add_library(AlgGenSelection ${selection})
+
+target_link_libraries(AlgGenSelection LINK_PUBLIC AlgGenBase)
+
+target_include_directories(AlgGenSelection PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
