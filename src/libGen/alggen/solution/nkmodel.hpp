@@ -1,6 +1,7 @@
 #pragma once
 
 #include <alggen/base/mutation.hpp>
+#include <alggen/base/model.hpp>
 #include <alggen/base/solution.hpp>
 #include <alggen/problem/nk.hpp>
 #include <string>
@@ -12,7 +13,7 @@ namespace solution
 {
 
 // NK function as an algorithm generation solution
-class NKModel : public base::Solution, public problem::NK
+class NKModel : public base::Model
 {
     public:
 
@@ -37,7 +38,19 @@ class NKModel : public base::Solution, public problem::NK
     virtual void randomize() override;
     virtual void print(std::ostream & out) const override;
 
+    virtual void setNewSolution(std::shared_ptr<base::Solution> const& s) const final;
+    virtual void mutateLastSolution(std::shared_ptr<base::Mutation> const& m) const final;
+
+    virtual std::shared_ptr<base::Solution> createSolution() const final;
+
+    virtual std::string to_string(base::Fitness const& x) const final;
+
     private:
+
+    virtual base::Fitness evaluate(std::shared_ptr<base::Solution> const& s) const final;
+    virtual base::Fitness incremental_evaluation(std::shared_ptr<base::Mutation> const& m) const final;
+
+    problem::NK nk_;
 
     utils::DrawWithoutReplacement matrix_distribution_;
     utils::DrawWithoutReplacement links_distribution_;

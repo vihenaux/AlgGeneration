@@ -12,8 +12,12 @@ class Model : public Solution, public Function
 {
     public:
 
-    Model() = delete;
+    Model() = default;
     virtual ~Model() override = default;
+
+    private:
+
+    virtual void requiredForVTable() const;
 };
 
 }

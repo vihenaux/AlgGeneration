@@ -7,6 +7,10 @@
 
 namespace alggen
 {
+namespace solution
+{
+class NKModel;
+}
 namespace problem
 {
 
@@ -36,6 +40,8 @@ class NK : public base::Function
 
     void randomize();
 
+    private:
+
     std::size_t n_;
     std::size_t k_;
     std::size_t k1_;
@@ -45,13 +51,13 @@ class NK : public base::Function
     std::vector<std::uint16_t> links_;
     std::vector<std::vector<std::uint16_t>> var_in_links_;
 
-    private:
-
     virtual base::Fitness evaluate(std::shared_ptr<base::Solution> const& s) const final;
     virtual base::Fitness incremental_evaluation(std::shared_ptr<base::Mutation> const& m) const final;
 
     mutable base::Fitness score_{0};
     mutable solution::BitString sol_;
+
+    friend solution::NKModel;
 };
 
 }
