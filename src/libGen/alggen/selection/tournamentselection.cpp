@@ -6,10 +6,10 @@ namespace selection
 {
 
 template<unsigned int percentage_kept_each_step>
-std::vector<std::shared_ptr<base::Mutation>> tournament_selection(std::shared_ptr<base::Function> &const fobj, std::shared_ptr<base::SearchAlgorithm> & search, std::shared_ptr<base::Model> & falt, std::vector<std::shared_ptr<Mutation>> &const candidates, unsigned int number_to_select, unsigned int budget_of_fobj_calls)
+std::vector<std::shared_ptr<base::Mutation>> tournament_selection(std::shared_ptr<base::Function> const& fobj, std::shared_ptr<base::SearchAlgorithm> & search, std::shared_ptr<base::Model> & falt, std::vector<std::shared_ptr<base::Mutation>> const& candidates, unsigned int number_to_select, unsigned int budget_of_fobj_calls)
 {
     // Find tournament parameters
-    unsigned int candidates_count = candidates.size();
+    unsigned int candidates_count = static_cast<unsigned int>(candidates.size());
     unsigned int fobj_calls_round_count = candidates_count;
     while(candidates_count != number_to_select)
     {
@@ -19,7 +19,7 @@ std::vector<std::shared_ptr<base::Mutation>> tournament_selection(std::shared_pt
 
         fobj_calls_round_count += candidates_count;
     }
-    unsigned int fobj_calls_per_round_per_candidate = budget/fobj_calls_round_count;
+    unsigned int fobj_calls_per_round_per_candidate = budget_of_fobj_calls/fobj_calls_round_count;
 
     std::vector<std::shared_ptr<base::Mutation>> current_selection(candidates);
 
@@ -27,14 +27,15 @@ std::vector<std::shared_ptr<base::Mutation>> tournament_selection(std::shared_pt
     while(current_selection.size() != number_to_select)
     {
         // Fitness estimations
-        std::vector<alggen::Fitness> fitness_estimations(current_selection.size(), 0);
+        std::vector<alggen::base::Fitness> fitness_estimations(current_selection.size(), 0);
         for(unsigned int i(0); i < current_selection.size(); ++i)
         {
             falt->mutate(current_selection[i]);
             search->changeObjectiveFunction(falt);
             for(unsigned int j(0); j < fobj_calls_per_round_per_candidate; ++j)
             {
-                fitness_estimation[i] += fobj((*search)());
+                (*search)();
+                fitness_estimations[i] += (*fobj)(search->getResultCopy());
             }
             falt->reverseMutation(current_selection[i]);
         }
@@ -47,13 +48,15 @@ std::vector<std::shared_ptr<base::Mutation>> tournament_selection(std::shared_pt
             unsigned int index_min = 0;
             for(unsigned int j(1); j < current_selection.size(); ++j)
             {
-                if(fitness_estimation[j] > fitness_estimation[index_min])
+                if(fitness_estimations[j] > fitness_estimations[index_min])
                 {
                     index_min = j;
                 }
             }
-            fitness_estimation.erase(index_min);
-            current_selection(index_min);
+            fitness_estimations[index_min] = fitness_estimations.back();
+            fitness_estimations.pop_back();
+            current_selection[index_min] = current_selection.back();
+            current_selection.pop_back();
         }
     }
 
